@@ -59,17 +59,24 @@
           </div>
 
           <div class="wrap-filter">
-            <button type="button" class="btn-filter-tag">전체</button>
-            <button type="button" class="btn-filter-tag">시멘틱</button>
-            <button type="button" class="btn-filter-tag">인라인</button>
-            <button type="button" class="btn-filter-tag">블록</button>
+            <button type="button" id="btn-all" class="btn-filter-tag">
+              전체
+            </button>
+            <button type="button" id="btn-semantic" class="btn-filter-tag">
+              시멘틱
+            </button>
+            <button type="button" id="btn-inline" class="btn-filter-tag">
+              인라인
+            </button>
+            <button type="button" id="btn-block" class="btn-filter-tag">
+              블록
+            </button>
           </div>
 
-          <ul class="warp-tag">
-            <!-- <button type="button" class="btn-tag-item">div</button> -->
-          </ul>
+          <ul id="warp-items" class="warp-tag"></ul>
         </aside>
       </div>
     </main>
+    <script src="/js/renderTags.js"></script>
   </body>
 </html>
