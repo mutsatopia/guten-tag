@@ -1,0 +1,138 @@
+.sr-only{
+    position:absolute;
+    width:1px;
+    height: 1px;
+    margin:-1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+}
+
+body{
+    background-color: #33495C;
+}
+
+/* header */
+.header-menu_bar{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #183B59;
+}
+
+.link-logo{
+    width: 180px;
+    height: 38px;
+    vertical-align: top;
+}
+
+.input-title{
+    max-width: 150px;
+    border: none;
+    background: none;
+    color: #FFF;
+    font-size: 30px;
+}
+
+.input-title:focus{
+    outline: none;
+}
+
+.warp-btn_menu{
+    display: flex;
+    align-items: center;
+    gap:30px;
+}
+
+.btn-headmenu, .btn-search{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.bi-palette-fill, .bi-grid-3x3, .bi-file-earmark-text-fill{
+    color: #fff;
+    font-size: 20px;
+}
+
+/* 사이드 메뉴 */
+
+.warp-side{
+    display: flex;
+    margin: 10px;
+}
+
+.side-btn_list{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+    width: 40px;
+    height: 85vh;
+    padding: 40px 20px 0 20px;
+    border:1px solid #333;
+    border-radius: 10px;
+    
+    background-color: #183B59;
+}
+
+.warp-search{
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.btn-search{
+    position: absolute;
+    transform: translate(-30px, 5px);
+}
+
+.input-tag_search{
+    max-width: 185px;
+    height: 30px;
+    padding-right: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: #F2F2F2;
+    font-size: 20px;
+    box-sizing: border-box;
+}
+
+.btn-tag_list, .btn-attribute{
+    height: 40px;
+    border: none;
+    border-radius: 50px;
+    background-color: #F2F2F2;
+    cursor: pointer;
+}
+
+.bi-search{
+    font-size: 15px;
+}
+.bi-code, .bi-three-dots{
+    font-size: 20px;
+}
+
+.side-tag_list{
+    width: 185px;
+    height: 85vh;
+    padding: 40px 20px 0 20px;
+    border:1px solid #333;
+    border-radius: 10px;
+    background-color: #183B59;
+    overflow: scroll;
+}
+.side-tag_list::-webkit-scrollbar{
+    display: none;
+}
+
+.warp-tag{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:20px;
+}
+
+.btn-tag_item{
+    border-radius: 20px;
+    font-size: 20px;
+    line-height: 40px;
+}
