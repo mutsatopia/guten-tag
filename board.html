@@ -14,15 +14,15 @@
     <header class="header-menu_bar">
         <h1 class="sr-only">메인 보드 페이지입니다.</h1>
         <a href="javascript:void(0);">
-            <img src="./resource/logocolor.png" alt="구텐탁 로고이미지" class="link-logo">
+            <img src="./resource/logoblack_mini.png" alt="구텐탁 로고이미지" class="link-logo">
         </a>
 
         <input type="text" id="title" value="Document" class="input-title">
 
         <div class="warp-btn_menu">
-            <button type="button" class="btn-headmenu palette"><i class="bi bi-palette-fill"></i></button>
-            <button type="button" class="btn-headmenu grid"><i class="bi bi-grid-3x3"></i></button>
-            <button type="button" class="btn-headmenu file"><i class="bi bi-file-earmark-text-fill"></i></button>
+            <button type="button" class="btn-headmenu palette"><i class="bi bi-palette-fill"></i> 테마</button>
+            <button type="button" class="btn-headmenu grid"><i class="bi bi-grid-3x3"></i> 격자</button>
+            <button type="button" class="btn-headmenu file"><i class="bi bi-file-earmark-text-fill"></i> 추출</button>
         </div>
     </header>
     <main>
@@ -37,6 +37,13 @@
                     <label for="search-tag" class="sr-only">태그 검색바</label>
                     <input type="text" id="search-tag" class="input-tag_search">
                     <button type="button" class="btn-search"><i class="bi bi-search"></i></button>
+                </div>
+
+                <div class="wrap-filter">
+                    <button type="button" class="btn-filter_tag">전체</button>
+                    <button type="button" class="btn-filter_tag">시멘틱</button>
+                    <button type="button" class="btn-filter_tag">인라인</button>
+                    <button type="button" class="btn-filter_tag">블록</button>
                 </div>
 
                 <div class="warp-tag">
