@@ -12,7 +12,7 @@ body{
 }
 
 /* header */
-.header-menu_bar{
+.header-menu-bar{
     display: flex;
     justify-content: space-between;
     padding: 20px;
@@ -39,7 +39,7 @@ body{
     outline: none;
 }
 
-.warp-btn_menu{
+.warp-btn-menu{
     display: flex;
     align-items: center;
     gap:20px;
@@ -84,7 +84,7 @@ main{
     border: none;
     cursor: pointer;
 }
-.side-btn_list{
+.side-btn-list{
     display: flex;
     flex-direction: column;
     gap:30px;
@@ -104,7 +104,7 @@ main{
     transform: translate(-30px, 5px);
 }
 
-.input-tag_search{
+.input-tag-search{
     max-width: 185px;
     height: 30px;
     padding-right: 30px;
@@ -121,14 +121,14 @@ main{
     margin-bottom: 40px;
 }
 
-.btn-filter_tag{
+.btn-filter-tag{
     padding: 0;
     background: none;
     border: none;
     cursor: pointer;
 }
 
-.btn-tag_list, .btn-attribute{
+.btn-tag-list, .btn-attribute{
     height: 40px;
     border: none;
     border-radius: 50px;
@@ -143,14 +143,14 @@ main{
     font-size: 20px;
 }
 
-.side-tag_list{
+.side-tag-list{
     width: 185px;
     height: 820px;
     padding: 40px 20px 0 20px;
     background-color: #fff;
     overflow: scroll;
 }
-.side-tag_list::-webkit-scrollbar{
+.side-tag-list::-webkit-scrollbar{
     display: none;
 }
 
@@ -161,7 +161,7 @@ main{
     gap:20px;
 }
 
-.btn-tag_item{
+.btn-tag-item{
     border: none;
     border-radius: 20px;
     font-size: 20px;
