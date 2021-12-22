@@ -1,10 +1,10 @@
-const ALL = document.querySelector("#btn-all");
-const INLINE = document.querySelector("#btn-inline");
-const BLOCK = document.querySelector("#btn-block");
-const SEMANTIC = document.querySelector("#btn-semantic");
-const ITEMS = document.querySelector("#warp-items");
+const btnAll = document.querySelector("#btn-all");
+const btnInline = document.querySelector("#btn-inline");
+const btnBlock = document.querySelector("#btn-block");
+const btnSemantic = document.querySelector("#btn-semantic");
+const wrapTag = document.querySelector(".warp-tag");
 
-const TAG_DATA = [
+const tagData = [
   {
     tag: "div",
     clsArr: ["block"],
@@ -26,7 +26,7 @@ const TAG_DATA = [
 
 const randerTags = function (arr, cls) {
   return function () {
-    ITEMS.innerHTML = "";
+    wrapTag.innerHTML = "";
     const fragment = document.createDocumentFragment();
     arr.forEach(({ tag, clsArr }) => {
       if (!cls || clsArr.includes(cls)) {
@@ -36,13 +36,13 @@ const randerTags = function (arr, cls) {
         fragment.appendChild(item);
       }
     });
-    ITEMS.appendChild(fragment);
+    wrapTag.appendChild(fragment);
   };
 };
 
-ALL.addEventListener("click", randerTags(TAG_DATA));
-INLINE.addEventListener("click", randerTags(TAG_DATA, "inline"));
-BLOCK.addEventListener("click", randerTags(TAG_DATA, "block"));
-SEMANTIC.addEventListener("click", randerTags(TAG_DATA, "semantic"));
+btnAll.addEventListener("click", randerTags(tagData));
+btnInline.addEventListener("click", randerTags(tagData, "inline"));
+btnBlock.addEventListener("click", randerTags(tagData, "block"));
+btnSemantic.addEventListener("click", randerTags(tagData, "semantic"));
 
-randerTags(TAG_DATA)();
+randerTags(tagData)();
