@@ -172,5 +172,37 @@ main {
 }
 
 .board {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
     flex: 1;
+    position: relative;
+    height: 860px;
+    box-sizing: border-box;
+}
+
+.tag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: solid black;
+    background-color: mistyrose;
+    box-sizing: border-box;
+}
+
+.board-grid {
+    position: absolute;
+}
+
+.line-column {
+    position: absolute;
+    border-left: 1px solid;
+}
+
+.line-row {
+    position: absolute;
+    border-top: 1px solid;
 }
