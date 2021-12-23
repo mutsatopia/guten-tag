@@ -24,6 +24,7 @@ const tagData = [
   },
 ];
 
+// 태그 선택 바에서 태그 버튼을 클릭할 때 이벤트 핸들러
 const tagClickHandler = (data) => {
   return () => board.add(data);
 };

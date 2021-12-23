@@ -175,10 +175,10 @@ main {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    flex: 1;
     position: relative;
     height: 860px;
     box-sizing: border-box;
-    flex: 1;
 }
 
 .tag {

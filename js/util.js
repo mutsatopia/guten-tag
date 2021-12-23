@@ -1,5 +1,4 @@
-const trim = (value, unit) => value - (value % unit);
-
+// DOM 요소의 width와 height 스타일 지정
 const setElemSize = (elem, width, height) => {
   if (typeof width === "string") {
     elem.style.width = width;
@@ -14,6 +13,7 @@ const setElemSize = (elem, width, height) => {
   }
 };
 
+// DOM 요소의 left와 top 스타일 지정
 const setElemPos = (elem, x, y) => {
   if (typeof x === "string") {
     elem.style.left = x;
@@ -28,7 +28,5 @@ const setElemPos = (elem, x, y) => {
   }
 };
 
-const setElemStyle = (elem, width, height, x, y) => {
-  setElemSize(elem, width, height);
-  setElemPos(elem, x, y);
-};
+// 격자 칸의 크기 단위로 이동할 때 좌표 값을 격자 선에 맞추기 위해 사용
+const trim = (value, unit) => value - (value % unit);

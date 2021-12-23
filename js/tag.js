@@ -9,6 +9,7 @@ class Tag {
     this.initElem();
   }
 
+  // DOM 요소를 생성하고 elem 프로퍼티에 할당
   initElem() {
     this.elem = document.createElement("div");
     this.setFontSize();
@@ -17,16 +18,21 @@ class Tag {
     this.hide();
   }
 
-  setStyle(width, height, x, y, grid) {
-    this.setSize(width, height);
-    if (grid) this.setPos(x, y, grid);
-  }
-
+  // DOM 요소의 글자 크기를 크기에 비례해서 지정
   setFontSize() {
     const fontSize = (this.height ?? 100) / 4;
     this.elem.style.fontSize = `${fontSize > 40 ? 40 : fontSize}px`;
   }
 
+  // DOM 요소의 width, height 스타일 및 글자 크기 설정
+  setSize(width, height) {
+    this.width = width ?? this.width;
+    this.height = height ?? this.height;
+    setElemSize(this.elem, this.width, this.height);
+    this.setFontSize();
+  }
+
+  // DOM 요소의 위치 설정 (transform 스타일 설정)
   setPos(x, y, grid) {
     if (grid) {
       const { size, margin } = grid;
@@ -39,14 +45,11 @@ class Tag {
     this.elem.style.transform = `translate(${this.x}px, ${this.y}px)`;
   }
 
-  setSize(width, height) {
-    this.width = width ?? this.width;
-    this.height = height ?? this.height;
-    this.elem.style.width = `${this.width}px`;
-    this.elem.style.height = `${this.height}px`;
-    this.setFontSize();
-  }
-
+  // Tag 객체의 state 프로퍼티 설정 및 state에 따른 스타일 변경
+  // none: 초기값. 또는 ready 상태에서 보드 바깥으로 마우스를 이동했을 때
+  // ready: 태그 선택 창에서 눌러서 잔상이 보이는 상태
+  // located: 잔상인 상태에서 클릭해서 보드에 표시된 상태
+  // selected: 보드에 표시된 태그를 클릭해서 해당 태그에 대한 어트리뷰트 편집 창이 보이는 상태
   setState(state) {
     if (this.state === state) return;
     this.state = state;
@@ -56,7 +59,6 @@ class Tag {
         break;
       case "located":
       case "selected":
-        // 태그 선택 바를 어트리뷰트 편집 바로 변경
     }
   }
 
