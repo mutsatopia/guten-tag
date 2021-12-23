@@ -19,7 +19,7 @@ class Tag {
 
   setStyle(width, height, x, y, grid) {
     this.setSize(width, height);
-    if (x) this.setPos(x, y, grid);
+    if (grid) this.setPos(x, y, grid);
   }
 
   setFontSize() {
@@ -30,8 +30,8 @@ class Tag {
   setPos(x, y, grid) {
     if (grid) {
       const { size, margin } = grid;
-      this.x = (margin + x - x % size) ?? this.x;
-      this.y = (margin + y - y % size) ?? this.x;
+      this.x = (trim(x, size) + margin) ?? this.x;
+      this.y = (trim(y, size) + margin) ?? this.x;
     } else {
       this.x = x ?? this.x;
       this.y = y ?? this.y;

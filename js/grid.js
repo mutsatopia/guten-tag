@@ -9,11 +9,9 @@ const grid = {
     this.margin = (width % this.size) / 2;
 
     this.elem = document.createElement('div');
-    this.elem.style.width = `${width}px`;
-    this.elem.style.height = `${height}px`;
-    this.elem.style.top = 0;
-    this.elem.style.left = 0;
     this.elem.classList.add('board-grid');
+    setElemStyle(this.elem, width, height, 0, 0);
+    
     this.cols = [...Array(parseInt(width / this.size) + 1)]
       .map((_, i) => this.getLine(i, true))
       .forEach(line => this.elem.appendChild(line));
@@ -29,16 +27,10 @@ const grid = {
     
     if (isColumn) {
       line.classList.add('line-column');
-      line.style.width = 1;
-      line.style.height = "100%";
-      line.style.top = 0;
-      line.style.left = `${index * this.size + this.margin}px`;
+      setElemStyle(line, 1, "100%", index * this.size + this.margin, 0);
     } else {
       line.classList.add('line-row');
-      line.style.width = "100%";
-      line.style.height = 1;
-      line.style.top = `${index * this.size + this.margin}px`;
-      line.style.left = 0;
+      setElemStyle(line, "100%", 1, 0, index * this.size + this.margin);
     }
     return line;
   },

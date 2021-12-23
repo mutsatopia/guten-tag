@@ -6,10 +6,11 @@ const board = {
   grid,
 
   init(width, height) {
-    this.body.setStyle(width, height);
     this.elem.appendChild(this.body.elem);
     this.body.show();
     this.grid.init(this);
+    const { size } = this.grid;
+    this.body.setStyle(trim(width, size), trim(height, size), 0, 0, this.grid)
   },
 
   searchElem(target, start = this.body) {
@@ -36,9 +37,14 @@ const board = {
   },
 
   add(data) {
+    const { keyword } = data;
     const tag = new Tag(data, {});
     const { size } = grid;
-    tag.setStyle(size * 4 + 1, size * 4 + 1, 0, 0, grid);
+    if (keyword.includes("block")) {
+      tag.setStyle(this.body.width - size * 2 + 1, size * 3 + 1, 0, 0, grid);
+    } else {
+      tag.setStyle(size * 6 + 1, size * 3 + 1, 0, 0, grid);
+    }
     tag.setState("ready");
     board.elem.appendChild(tag.elem);
     board.ready = tag;
