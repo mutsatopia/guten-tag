@@ -17,9 +17,9 @@ class Tag {
     this.hide();
   }
 
-  setStyle(width, height, x, y, gridSize) {
+  setStyle(width, height, x, y, grid) {
     this.setSize(width, height);
-    if (x) this.setPos(x, y, gridSize);
+    if (x) this.setPos(x, y, grid);
   }
 
   setFontSize() {
@@ -27,10 +27,11 @@ class Tag {
     this.elem.style.fontSize = `${fontSize > 40 ? 40 : fontSize}px`;
   }
 
-  setPos(x, y, gridSize) {
-    if (gridSize) {
-      this.x = (x - x % gridSize) ?? this.x;
-      this.y = (y - y % gridSize) ?? this.x;
+  setPos(x, y, grid) {
+    if (grid) {
+      const { size, margin } = grid;
+      this.x = (margin + x - x % size) ?? this.x;
+      this.y = (margin + y - y % size) ?? this.x;
     } else {
       this.x = x ?? this.x;
       this.y = y ?? this.y;

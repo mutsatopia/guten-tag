@@ -193,3 +193,17 @@ main {
     margin-bottom: 40px;
     box-sizing: border-box;
 }
+
+.board-grid {
+    position: absolute;
+}
+
+.line-column {
+    position: absolute;
+    border-left: 1px solid;
+}
+
+.line-row {
+    position: absolute;
+    border-top: 1px solid;
+}

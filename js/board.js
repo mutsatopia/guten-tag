@@ -3,12 +3,13 @@ const board = {
   body: new Tag({ tagName: "body", keyword: [], attr: [] }),
   ready: null,
   selected: null,
-  gridSize: 32,
+  grid,
 
   init(width, height) {
     this.body.setStyle(width, height);
     this.elem.appendChild(this.body.elem);
     this.body.show();
+    this.grid.init(this);
   },
 
   searchElem(target, start = this.body) {
@@ -36,7 +37,8 @@ const board = {
 
   add(data) {
     const tag = new Tag(data, {});
-    tag.setStyle(size * 4 + 1, size * 4 + 1, 0, 0, this.gridSize);
+    const { size } = grid;
+    tag.setStyle(size * 4 + 1, size * 4 + 1, 0, 0, grid);
     tag.setState("ready");
     board.elem.appendChild(tag.elem);
     board.ready = tag;
@@ -51,7 +53,7 @@ const clickHandler = (event) => {
   const { ready } = board;
   if (ready) {
     const [ x, y ] = board.getOffset(event);
-    ready.setPos(x, y, this.gridSize);
+    ready.setPos(x, y, grid);
     ready.setState("located");
   } else {
     const { target } = event;
@@ -64,7 +66,7 @@ const mouseoverHandler = (event) => {
   const { ready } = board;
   if (!ready) return;
   const [ x, y ] = board.getOffset(event);
-  ready.setPos(x, y, this.gridSize);
+  ready.setPos(x, y, grid);
   ready.show();
 };
 
@@ -72,7 +74,7 @@ const mousemoveHandler = (event) => {
   const { ready } = board;
   if (!ready) return;
   const [ x, y ] = board.getOffset(event);
-  ready.setPos(x, y, this.gridSize);
+  ready.setPos(x, y, grid);
 };
 
 const mouseoutHandler = () => {
