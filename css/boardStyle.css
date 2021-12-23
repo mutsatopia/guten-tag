@@ -172,5 +172,24 @@ main {
 }
 
 .board {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    height: 860px;
+    box-sizing: border-box;
     flex: 1;
+}
+
+.tag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: solid black;
+    background-color: mistyrose;
+    margin-bottom: 40px;
+    box-sizing: border-box;
 }

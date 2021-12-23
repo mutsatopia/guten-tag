@@ -6,33 +6,39 @@ const wrapTag = document.querySelector(".warp-tag");
 
 const tagData = [
   {
-    tag: "div",
-    clsArr: ["block"],
+    tagName: "div",
+    keyword: ["block"],
     attr: [],
   },
 
   {
-    tag: "li",
-    clsArr: ["inline"],
+    tagName: "li",
+    keyword: ["inline"],
     attr: [],
   },
 
   {
-    tag: "header",
-    clsArr: ["block", "semantic"],
+    tagName: "header",
+    keyword: ["block", "semantic"],
     attr: [],
   },
 ];
+
+const tagClickHandler = (data) => {
+  return () => board.add(data);
+};
 
 const randerTags = function (arr, cls) {
   return function () {
     wrapTag.innerHTML = "";
     const fragment = document.createDocumentFragment();
-    arr.forEach(({ tag, clsArr }) => {
-      if (!cls || clsArr.includes(cls)) {
+    arr.forEach((data) => {
+      const { tagName, keyword } = data;
+      if (!cls || keyword.includes(cls)) {
         let item = document.createElement("li");
-        let text = document.createTextNode(tag);
+        let text = document.createTextNode(tagName);
         item.appendChild(text);
+        item.addEventListener('click', tagClickHandler(data))
         fragment.appendChild(item);
       }
     });

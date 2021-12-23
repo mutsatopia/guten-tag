@@ -1,5 +1,5 @@
 class Tag {
-  constructor(tagData, { state, parent, children }) {
+  constructor(tagData, { state, parent, children } = {}) {
     for (const key in tagData) {
       this[key] = tagData[key];
     }
@@ -11,20 +11,39 @@ class Tag {
 
   initElem() {
     this.elem = document.createElement("div");
-    this.elem.style.position = "absolute";
-    // this.elem.classList.add("");
+    this.setFontSize();
+    this.elem.textContent = this.tagName;
+    this.elem.classList.add("tag");
+    this.hide();
   }
 
-  setElemPos(x, y) {
-    this.x = x ?? this.x;
-    this.y = y ?? this.y;
-    this.elem.style.left = `${this.x}px`;
-    this.elem.style.top = `${this.y}px`;
+  setStyle(width, height, x, y, gridSize) {
+    this.setSize(width, height);
+    if (x) this.setPos(x, y, gridSize);
   }
 
-  setElemSize(width, height) {
+  setFontSize() {
+    const fontSize = (this.height ?? 100) / 4;
+    this.elem.style.fontSize = `${fontSize > 40 ? 40 : fontSize}px`;
+  }
+
+  setPos(x, y, gridSize) {
+    if (gridSize) {
+      this.x = (x - x % gridSize) ?? this.x;
+      this.y = (y - y % gridSize) ?? this.x;
+    } else {
+      this.x = x ?? this.x;
+      this.y = y ?? this.y;
+    }
+    this.elem.style.transform = `translate(${this.x}px, ${this.y}px)`;
+  }
+
+  setSize(width, height) {
     this.width = width ?? this.width;
     this.height = height ?? this.height;
+    this.elem.style.width = `${this.width}px`;
+    this.elem.style.height = `${this.height}px`;
+    this.setFontSize();
   }
 
   setState(state) {
@@ -32,17 +51,19 @@ class Tag {
     this.state = state;
     switch (state) {
       case "ready":
-        this.elem.style.position = "fixed";
+        this.elem.style.opacity = "0.4";
         break;
-      case "none":
-        const children = this.parent.children;
-        children.splice(children.indexOf(this.elem), 1);
-        break;
-      case "display":
-        this.elem.style.position = "absolute";
-        break;
+      case "located":
       case "selected":
         // 태그 선택 바를 어트리뷰트 편집 바로 변경
     }
+  }
+
+  show() {
+    this.elem.style.display = 'flex';
+  }
+
+  hide() {
+    this.elem.style.display = 'none';
   }
 }
