@@ -4,26 +4,6 @@ const btnBlock = document.querySelector("#btn-block");
 const btnSemantic = document.querySelector("#btn-semantic");
 const wrapTag = document.querySelector(".warp-tag");
 
-const tagData = [
-  {
-    tag: "div",
-    clsArr: ["block"],
-    attr: [],
-  },
-
-  {
-    tag: "li",
-    clsArr: ["inline"],
-    attr: [],
-  },
-
-  {
-    tag: "header",
-    clsArr: ["block", "semantic"],
-    attr: [],
-  },
-];
-
 const randerTags = function (arr, cls) {
   return function () {
     wrapTag.innerHTML = "";
