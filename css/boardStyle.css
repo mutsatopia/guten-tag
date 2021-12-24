@@ -103,7 +103,7 @@ main {
     flex-direction: column;
     gap:30px;
     width: 40px;
-    height: 820px;
+    height: 100vh;
     padding: 40px 20px 0 20px;
     background-color: #E0E0E0;
 }
@@ -161,24 +161,25 @@ main {
 .side-tag-list, .side-attr-list{
     display: none;
     width: 185px;
-    height: 820px;
+    height: 100vh;
     padding: 40px 20px 0 20px;
     background-color: #fff;
-    overflow: scroll;
 }
 .side-attr-list{
     width: 225px;
     padding :0;
+    overflow: scroll;
 }
-.side-tag-list::-webkit-scrollbar, .side-attr-list::-webkit-scrollbar {
+.wrap-tag::-webkit-scrollbar, .side-attr-list::-webkit-scrollbar {
     display: none;
 }
 
 .wrap-tag {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 20px;
+    height: 725px;
+    overflow: scroll;
 }
 
 .btn-tag-item, .wrap-tag li{
