@@ -13,8 +13,10 @@ const board = {
     this.elem.appendChild(this.body.elem);
     this.grid.init(this);
     const { size } = this.grid;
-    this.body.setSize(trim(width, size), trim(height, size));
-    this.body.setPos(0, 0, this.grid);
+    [ width, height ] = [ trim(width, size), trim(height, size) ];
+    const [ boardWidth, boardHeight ] = this.getSize();
+    this.body.setSize(width, height);
+    this.body.setPos((boardWidth - width) / 2, (boardHeight - height) / 2, this.grid);
     this.body.show();
   },
 
