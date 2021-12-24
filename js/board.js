@@ -14,10 +14,18 @@ const board = {
     this.grid.init(this);
     const { size } = this.grid;
     [ width, height ] = [ trim(width, size), trim(height, size) ];
-    const [ boardWidth, boardHeight ] = this.getSize();
     this.body.setSize(width, height);
-    this.body.setPos((boardWidth - width) / 2, (boardHeight - height) / 2, this.grid);
     this.body.show();
+    this.grid.paintGrid();
+    this.body.setPos((this.width - width) / 2, (this.height - height) / 2, this.grid);
+  },
+
+  // 현재 시점에서의 보드 DOM 요소의 width, height를 반환
+  get width() {
+    return this.elem.scrollWidth;
+  },
+  get height() {
+    return this.elem.scrollHeight;
   },
 
   // 너비 우선 탐색으로 body에서부터 children을 통해 Tag 객체를 찾아서 반환
@@ -48,12 +56,6 @@ const board = {
   searchByLocation(event, start = this.body) {
     const condition = (tag) => this.isInside(tag, this.getOffset(event));
     return this.getTag(condition, start);
-  },
-
-  // 현재 시점에서의 보드 DOM 요소의 width, height를 반환
-  getSize() {
-    const { width, height } = this.elem.getBoundingClientRect();
-    return [ width, height ];
   },
 
   // 보드의 좌상단을 x = 0, y = 0으로 하고 스크롤까지 고려한 현재 마우스 좌표 반환
@@ -97,17 +99,14 @@ const board = {
 // board의 ready값이 존재 -> 태그 선택 바에서 태그를 선택한 상태
 // 그렇지 않은 경우 -> 보드에 표시된 태그를 선택한 상태
 const clickHandler = (event) => {
-  const { target, currentTarget } = event;
-  if (target === currentTarget) return;
-
   const { ready } = board;
   if (ready) {
     const [ x, y ] = board.getOffset(event);
     ready.setPos(x, y, grid);
     ready.setState("located");
   } else {
-    board.selected = board.searchByElem(event);
-    board.selected.setState("selected");
+    board.selected = board.searchByLocation(event);
+    board.selected?.setState("selected");
   }
 };
 
@@ -150,4 +149,4 @@ board.elem.addEventListener("mouseover", mouseoverHandler);
 board.elem.addEventListener("mousemove", mousemoveHandler);
 board.elem.addEventListener("mouseout", mouseoutHandler);
 
-board.init(1296, 800);
+board.init(1200, 800);
