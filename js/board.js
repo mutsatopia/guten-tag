@@ -92,6 +92,12 @@ const board = {
     const { children } = parent ?? {};
     board.elem.removeChild(elem);
     if (children) children.splice(children.indexOf(tag), 1);
+  },
+
+  clearReady() {
+    if (!this.ready) return;
+    this.delete(this.ready);
+    this.ready = null;
   }
 };
 
@@ -144,9 +150,27 @@ const mouseoutHandler = () => {
   ready.setState("none");
 };
 
+const mousedownHandler = (event) => {
+  const { which, button } = event;
+  if (which === 3 || button === 2) {
+    board.clearReady();
+  }
+};
+
 board.elem.addEventListener("click", clickHandler);
 board.elem.addEventListener("mouseover", mouseoverHandler);
 board.elem.addEventListener("mousemove", mousemoveHandler);
 board.elem.addEventListener("mouseout", mouseoutHandler);
+board.elem.addEventListener("mousedown", mousedownHandler);
+board.elem.addEventListener("contextmenu", (event) => event.preventDefault());
+
+const keydownHandler = ({ key }) => {
+  switch (key) {
+    case "Escape":
+      board.clearReady();
+  }
+};
+
+document.addEventListener("keydown", keydownHandler);
 
 board.init(1200, 800);
