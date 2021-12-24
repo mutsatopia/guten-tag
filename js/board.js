@@ -1,6 +1,6 @@
 const board = {
   elem: document.querySelector(".board"),
-  body: new Tag({ tagName: "body", keyword: [], attr: [] }),
+  body: new Tag({ tagName: "body", keyword: [], attr: [] }, { state: "located" }),
   ready: null, // 태그 선택 창에서 선택한 요소
   selected: null,
   grid,
@@ -13,27 +13,49 @@ const board = {
     this.elem.appendChild(this.body.elem);
     this.grid.init(this);
     const { size } = this.grid;
-    this.body.setSize(trim(width, size), trim(height, size));
-    this.body.setPos(0, 0, this.grid);
+    [ width, height ] = [ trim(width, size), trim(height, size) ];
+    this.body.setSize(width, height);
     this.body.show();
+    this.grid.paintGrid();
+    this.body.setPos((this.width - width) / 2, (this.height - height) / 2, this.grid);
+  },
+
+  // 현재 시점에서의 보드 DOM 요소의 width, height를 반환
+  get width() {
+    return this.elem.scrollWidth;
+  },
+  get height() {
+    return this.elem.scrollHeight;
   },
 
   // 너비 우선 탐색으로 body에서부터 children을 통해 Tag 객체를 찾아서 반환
-  // DOM요소만 가지고 그 DOM 요소에 해당하는 Tag 객체를 찾을 때 사용
-  searchElem(target, start = this.body) {
+  getTag(condition, start = this.body) {
     const visited = new Map();
     const queue = [start];
     let tag;
 
     while (queue.length) {
       tag = queue.shift();
-      if (tag.elem === target) break;
+      if (condition(tag)) return tag;
       if (!visited.has(tag)) {
         visited.set(tag, null);
         queue.push(...tag.children);
       }
     }
-    return tag;
+    return null;
+  },
+
+  // event.target으로 그 DOM 요소에 해당하는 Tag 객체 반환
+  searchByElem(event, start = this.body) {
+    const { target } = event;
+    const condition = (tag) => tag.elem === target;
+    return this.getTag(condition, start);
+  },
+
+  // 현재 마우스가 어떤 태그 DOM 요소 위에 있는지 찾아서 해당하는 Tag 객체 반환
+  searchByLocation(event, start = this.body) {
+    const condition = (tag) => this.isInside(tag, this.getOffset(event));
+    return this.getTag(condition, start);
   },
 
   // 보드의 좌상단을 x = 0, y = 0으로 하고 스크롤까지 고려한 현재 마우스 좌표 반환
@@ -44,18 +66,19 @@ const board = {
     return [ clientX - x + scrollLeft, clientY - y + scrollTop ];
   },
 
+  isInside(tag, offset) {
+    const { width, height, x, y } = tag;
+    const [ cx, cy ] = offset;
+    return x <= cx && cx <= x + width && y <= cy && cy <= y + height;
+  },
+
   // tagData의 태그 data를 인자로 받아서 Tag 객체를 생성하고,
   // board의 ready에 할당함
   add(data) {
-    const { keyword } = data;
     const tag = new Tag(data, {});
     const { size } = grid;
     if (this.ready) this.delete(this.ready);
-    if (keyword.includes("block")) {
-      tag.setSize(this.body.width - size * 2 + 1, size * 3 + 1);
-    } else {
-      tag.setSize(size * 6 + 1, size * 3 + 1);
-    }
+    tag.setSize(size * 6 + 1, size * 3 + 1);
     tag.setPos(0, 0, grid);
     tag.setState("ready");
     board.elem.appendChild(tag.elem);
@@ -69,6 +92,12 @@ const board = {
     const { children } = parent ?? {};
     board.elem.removeChild(elem);
     if (children) children.splice(children.indexOf(tag), 1);
+  },
+
+  clearReady() {
+    if (!this.ready) return;
+    this.delete(this.ready);
+    this.ready = null;
   }
 };
 
@@ -76,18 +105,14 @@ const board = {
 // board의 ready값이 존재 -> 태그 선택 바에서 태그를 선택한 상태
 // 그렇지 않은 경우 -> 보드에 표시된 태그를 선택한 상태
 const clickHandler = (event) => {
-  const { target, currentTarget } = event;
-  if (target === currentTarget) return;
-
   const { ready } = board;
   if (ready) {
     const [ x, y ] = board.getOffset(event);
     ready.setPos(x, y, grid);
     ready.setState("located");
   } else {
-    const { target } = event;
-    board.selected = board.searchElem(target);
-    board.selected.setState("selected");
+    board.selected = board.searchByLocation(event);
+    board.selected?.setState("selected");
   }
 };
 
@@ -102,10 +127,19 @@ const mouseoverHandler = (event) => {
 
 // 마우스가 보드 안에서 움직일 때 이벤트 핸들러
 const mousemoveHandler = (event) => {
-  const { ready } = board;
+  const { ready, body } = board;
+  const { size } = grid;
   if (!ready) return;
-  const [ x, y ] = board.getOffset(event);
-  ready.setPos(x, y, grid);
+  const parent = board.searchByLocation(event);
+  if (parent === body && ready.keyword.includes("block")) {
+    const [ _, y ] = board.getOffset(event);
+    ready.setSize(body.width - size * 2 + 1, size * 3 + 1);
+    ready.setPos(body.x + size, y, grid);
+  } else {
+    const [ x, y ] = board.getOffset(event);
+    ready.setSize(size * 6 + 1, size * 3 + 1);
+    ready.setPos(x, y, grid);
+  }
 };
 
 // 마우스가 보드 안에서 바깥으로 나갈 때 이벤트 핸들러
@@ -116,9 +150,27 @@ const mouseoutHandler = () => {
   ready.setState("none");
 };
 
+const mousedownHandler = (event) => {
+  const { which, button } = event;
+  if (which === 3 || button === 2) {
+    board.clearReady();
+  }
+};
+
 board.elem.addEventListener("click", clickHandler);
 board.elem.addEventListener("mouseover", mouseoverHandler);
 board.elem.addEventListener("mousemove", mousemoveHandler);
 board.elem.addEventListener("mouseout", mouseoutHandler);
+board.elem.addEventListener("mousedown", mousedownHandler);
+board.elem.addEventListener("contextmenu", (event) => event.preventDefault());
 
-board.init(1296, 800);
+const keydownHandler = ({ key }) => {
+  switch (key) {
+    case "Escape":
+      board.clearReady();
+  }
+};
+
+document.addEventListener("keydown", keydownHandler);
+
+board.init(1200, 800);

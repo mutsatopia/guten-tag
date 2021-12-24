@@ -195,11 +195,9 @@ main {
 
 /* board 시작 */
 .board {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
     flex: 1;
     position: relative;
+    overflow: auto;
     height: 860px;
     box-sizing: border-box;
 }
