@@ -35,13 +35,20 @@ class Tag {
   // DOM 요소의 위치 설정 (transform 스타일 설정)
   setPos(x, y, grid) {
     if (grid) {
-      const { size, margin } = grid;
-      this.x = (trim(x, size) + margin) ?? this.x;
-      this.y = (trim(y, size) + margin) ?? this.x;
+      const { size, marginX, marginY, colCount, rowCount } = grid;
+      this.x = (trim(x, size) + marginX) ?? this.x;
+      this.y = (trim(y, size) + marginY) ?? this.x;
+      if (this.x + this.width > colCount * size + marginX) {
+        this.x = (colCount - parseInt(this.width / size) - 1) * size + marginX;
+      }
+      if (this.y + this.height > rowCount * size + marginY) {
+        this.y = (rowCount - parseInt(this.height / size) - 1) * size + marginY;
+      }
     } else {
       this.x = x ?? this.x;
       this.y = y ?? this.y;
     }
+
     this.elem.style.transform = `translate(${this.x}px, ${this.y}px)`;
   }
 

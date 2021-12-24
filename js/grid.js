@@ -23,11 +23,11 @@ const grid = {
     if (isColumn) {
       line.classList.add('line-column');
       setElemSize(line, 1, this.board.height);
-      setElemPos(line, index * this.size + this.margin, 0);
+      setElemPos(line, index * this.size + this.marginX, 0);
     } else {
       line.classList.add('line-row');
       setElemSize(line, this.board.width, 1);
-      setElemPos(line, 0, index * this.size + this.margin);
+      setElemPos(line, 0, index * this.size + this.marginY);
     }
     return line;
   },
@@ -38,12 +38,15 @@ const grid = {
   // 3. 격자를 담고 있는 DOM 요소를 보드 DOM 요소에 추가하여 화면에 표시
   paintGrid() {
     const { width, height } = this.board;
-    this.margin = (width % this.size) / 2;
+    this.marginX = (width % this.size) / 2;
+    this.marginY = (height % this.size) / 2;
+    this.colCount = parseInt(width / this.size) + 1;
+    this.rowCount = parseInt(height / this.size) + 1;
 
-    this.cols = [...Array(parseInt(width / this.size) + 1)]
+    this.cols = [...Array(this.colCount)]
       .map((_, i) => this.getLine(i, true))
       .forEach(line => this.elem.appendChild(line));
-    this.rows = [...Array(parseInt(height / this.size) + 1)]
+    this.rows = [...Array(this.rowCount)]
       .map((_, i) => this.getLine(i))
       .forEach(line => this.elem.appendChild(line));
 
