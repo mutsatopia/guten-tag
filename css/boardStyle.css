@@ -158,14 +158,19 @@ main {
     font-size: 20px;
 }
 
-.side-tag-list {
+.side-tag-list, .side-attr-list{
+    display: none;
     width: 185px;
     height: 820px;
     padding: 40px 20px 0 20px;
     background-color: #fff;
     overflow: scroll;
 }
-.side-tag-list::-webkit-scrollbar {
+.side-attr-list{
+    width: 225px;
+    padding :0;
+}
+.side-tag-list::-webkit-scrollbar, .side-attr-list::-webkit-scrollbar {
     display: none;
 }
 
@@ -176,7 +181,7 @@ main {
     gap: 20px;
 }
 
-.btn-tag-item, .warp-tag li{
+.btn-tag-item, .wrap-tag li{
     border-radius: 20px;
     font-size: 20px;
     line-height: 40px;
@@ -227,4 +232,79 @@ main {
 
 .click-tag {
     border: 2px solid black;
+}
+
+.side-list-on{
+    display: block;
+}
+
+/* 어트리뷰트 */
+
+.text-select-tag-name{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn-trash, .btn-child-open{
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+}
+.bi-trash{
+    font-size: 16px;
+}
+.btn-child-open{
+    width: 17px;
+    height: 17px;
+    background-image: url(../resource/down.png);
+    background-repeat: no-repeat;
+
+}
+
+.wrap-attr-menu{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    border-bottom: 1px solid #eee;
+}
+
+.wrap-tag-name, .wrap-attr-menu{
+    padding: 20px 10px;
+}
+.wrap-tag-name{
+    display: flex;
+    justify-content: space-between;
+    background-color: #eee;
+}
+
+.input-attr-name, .input-attr-user-custom{
+    line-height: 20px;
+    border: 1px solid #666;
+    border-radius: 5px;
+}
+
+.input-attr-name{
+    position: relative;
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.btn-attr-delete, .btn-attr-add{
+    width: 17px;
+    height: 17px;
+    border: none;
+    background-color: inherit;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.btn-attr-delete{
+    position: absolute;
+    background-image: url(../resource/attr-delete.png);
+    right: 10px;
+    
+}
+
+.btn-attr-add{
+    margin: 20px 0 0 10px;
+    background-image: url(../resource/attr-add.png);
 }
