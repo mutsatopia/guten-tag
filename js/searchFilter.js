@@ -1,5 +1,5 @@
 const searchTags = document.querySelector("#search-tag");
-const tagContainer = document.querySelector(".warp-tag");
+const tagContainer = document.querySelector(".wrap-tag");
 
 searchTags.addEventListener("keyup", searchFilter);
 
