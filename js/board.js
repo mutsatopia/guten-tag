@@ -1,6 +1,6 @@
 const board = {
   elem: document.querySelector(".board"),
-  body: new Tag({ tagName: "body", keyword: [], attr: [] }),
+  body: new Tag({ tagName: "body", keyword: [], attr: [] }, { state: "located" }),
   ready: null, // 태그 선택 창에서 선택한 요소
   selected: null,
   grid,
@@ -29,13 +29,29 @@ const board = {
 
     while (queue.length) {
       tag = queue.shift();
-      if (tag.elem === target) break;
+      if (tag.elem === target) return tag;
       if (!visited.has(tag)) {
         visited.set(tag, null);
         queue.push(...tag.children);
       }
     }
-    return tag;
+    return null;
+  },
+
+  searchByLocation(event, start = this.body) {
+    const visited = new Map();
+    const queue = [start];
+    let tag;
+
+    while (queue.length) {
+      tag = queue.shift();
+      if (this.isInside(tag, this.getOffset(event))) return tag;
+      if (!visited.has(tag)) {
+        visited.set(tag, null);
+        queue.push(...tag.children);
+      }
+    }
+    return null;
   },
 
   // 현재 시점에서의 보드 DOM 요소의 width, height를 반환
@@ -52,18 +68,19 @@ const board = {
     return [ clientX - x + scrollLeft, clientY - y + scrollTop ];
   },
 
+  isInside(tag, offset) {
+    const { width, height, x, y } = tag;
+    const [ cx, cy ] = offset;
+    return x <= cx && cx <= x + width && y <= cy && cy <= y + height;
+  },
+
   // tagData의 태그 data를 인자로 받아서 Tag 객체를 생성하고,
   // board의 ready에 할당함
   add(data) {
-    const { keyword } = data;
     const tag = new Tag(data, {});
     const { size } = grid;
     if (this.ready) this.delete(this.ready);
-    if (keyword.includes("block")) {
-      tag.setSize(this.body.width - size * 2 + 1, size * 3 + 1);
-    } else {
-      tag.setSize(size * 6 + 1, size * 3 + 1);
-    }
+    tag.setSize(size * 6 + 1, size * 3 + 1);
     tag.setPos(0, 0, grid);
     tag.setState("ready");
     board.elem.appendChild(tag.elem);
@@ -110,10 +127,19 @@ const mouseoverHandler = (event) => {
 
 // 마우스가 보드 안에서 움직일 때 이벤트 핸들러
 const mousemoveHandler = (event) => {
-  const { ready } = board;
+  const { ready, body } = board;
+  const { size } = grid;
   if (!ready) return;
-  const [ x, y ] = board.getOffset(event);
-  ready.setPos(x, y, grid);
+  const parent = board.searchByLocation(event);
+  if (parent === body && ready.keyword.includes("block")) {
+    const [ _, y ] = board.getOffset(event);
+    ready.setSize(body.width - size * 2 + 1, size * 3 + 1);
+    ready.setPos(body.x + size, y, grid);
+  } else {
+    const [ x, y ] = board.getOffset(event);
+    ready.setSize(size * 6 + 1, size * 3 + 1);
+    ready.setPos(x, y, grid);
+  }
 };
 
 // 마우스가 보드 안에서 바깥으로 나갈 때 이벤트 핸들러
