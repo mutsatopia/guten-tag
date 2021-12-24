@@ -11,19 +11,13 @@ const grid = {
   // 2. 격자를 그리고 격자를 담고 있는 DOM 요소를 보드 DOM 요소에 추가하여 화면에 표시
   init(board) {
     this.board = board;
-    const [ width, height ] = this.getBoardSize();
+    const [ width, height ] = board.getSize();
 
     this.elem = document.createElement('div');
     this.elem.classList.add('board-grid');
     setElemSize(this.elem, width, height);
     setElemPos(this.elem, 0, 0);
     this.paintGrid();
-  },
-
-  // 현재 시점에서의 보드 DOM 요소의 width, height를 반환
-  getBoardSize() {
-    const { x, y, right, bottom } = this.board.elem.getBoundingClientRect();
-    return [ right - x, bottom - y ];
   },
 
   // 격자 선 그리기
@@ -48,7 +42,7 @@ const grid = {
   // 2. size와 margin을 기준으로 일정 간격으로 가로 세로 선 생성
   // 3. 격자를 담고 있는 DOM 요소를 보드 DOM 요소에 추가하여 화면에 표시
   paintGrid() {
-    const [ width, height ] = this.getBoardSize();
+    const [ width, height ] = this.board.getSize();
     this.margin = (width % this.size) / 2;
 
     this.cols = [...Array(parseInt(width / this.size) + 1)]

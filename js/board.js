@@ -36,6 +36,12 @@ const board = {
     return tag;
   },
 
+  // 현재 시점에서의 보드 DOM 요소의 width, height를 반환
+  getSize() {
+    const { width, height } = this.elem.getBoundingClientRect();
+    return [ width, height ];
+  },
+
   // 보드의 좌상단을 x = 0, y = 0으로 하고 스크롤까지 고려한 현재 마우스 좌표 반환
   getOffset(event) {
     const { clientX, clientY } = event;
