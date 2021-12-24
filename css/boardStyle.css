@@ -176,14 +176,14 @@ main {
     gap: 20px;
 }
 
-.btn-tag-item, .wrap-tag li{
-    border: none;
+.btn-tag-item, .warp-tag li{
     border-radius: 20px;
     font-size: 20px;
     line-height: 40px;
     cursor: pointer;
     box-shadow: 0px 3px 3px rgba(0,0,0,.2);
     text-align: center;
+    box-sizing: border-box;
 }
 /* aside 끝 */
 
@@ -224,4 +224,7 @@ main {
     position: absolute;
     border-top: 1px solid;
 }
-/* board 끝 */
+
+.click-tag {
+    border: 2px solid black;
+}
