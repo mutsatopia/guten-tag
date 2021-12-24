@@ -172,9 +172,6 @@ main {
 }
 
 .board {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
     flex: 1;
     position: relative;
     height: 860px;
