@@ -162,13 +162,13 @@ main {
 }
 
 .btn-tag-item, .warp-tag li{
-    border: none;
     border-radius: 20px;
     font-size: 20px;
     line-height: 40px;
     cursor: pointer;
     box-shadow: 0px 3px 3px rgba(0,0,0,.2);
     text-align: center;
+    box-sizing: border-box;
 }
 
 .board {
@@ -206,3 +206,7 @@ main {
     position: absolute;
     border-top: 1px solid;
 }
+
+.click-tag {
+    border: 2px solid black;
+  }
