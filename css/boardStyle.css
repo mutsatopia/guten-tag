@@ -35,13 +35,18 @@ body {
 }
 
 .input-title {
-    max-width: 200px;
+    max-width: 300px;
     margin-left: 200px;
     border: none;
     border-radius: 30px;
     background-color: #f1f1f1;
     font-size: 20px;
     text-align: center;
+    transition: background-color 0.2s ease;
+}
+
+.input-title:hover, .input-title:focus {
+    background-color: #e0e0e0;
 }
 
 .input-title:focus {
@@ -51,7 +56,7 @@ body {
 .wrap-btn-menu {
     display: flex;
     align-items: center;
-    gap:20px;
+    gap: 20px;
 }
 
 .btn-headmenu {
@@ -92,10 +97,17 @@ main {
 }
 
 /* aside - 검색바 */
+.wrap-search {
+    position: relative;
+    margin-bottom: 10px;
+}
+
 .btn-search {
     background: none;
     border: none;
     cursor: pointer;
+    position: absolute;
+    transform: translate(-30px, 5px);
 }
 
 .side-btn-list {
@@ -108,16 +120,6 @@ main {
     background-color: #E0E0E0;
 }
 
-.wrap-search {
-    position: relative;
-    margin-bottom: 10px;
-}
-
-.btn-search {
-    position: absolute;
-    transform: translate(-30px, 5px);
-}
-
 .input-tag-search {
     max-width: 185px;
     height: 30px;
@@ -125,8 +127,17 @@ main {
     border: none;
     border-radius: 5px;
     background-color: #F2F2F2;
-    font-size: 20px;
+    font-size: 15px;
     box-sizing: border-box;
+    transition: background-color 0.2s ease;
+}
+
+.input-tag-search:hover, .input-tag-search:focus {
+    background-color: #e0e0e0;
+}
+
+.input-tag-search:focus {
+    outline: none;
 }
 
 /* aside - 태그 선택창 */
@@ -238,7 +249,6 @@ main {
 }
 
 /* 어트리뷰트 */
-
 .text-select-tag-name{
     font-size: 20px;
     font-weight: bold;
@@ -249,15 +259,16 @@ main {
     background-color: inherit;
     cursor: pointer;
 }
+
 .bi-trash{
     font-size: 16px;
 }
+
 .btn-child-open{
     width: 17px;
     height: 17px;
     background-image: url(../resource/down.png);
     background-repeat: no-repeat;
-
 }
 
 .wrap-attr-menu{
@@ -270,6 +281,7 @@ main {
 .wrap-tag-name, .wrap-attr-menu{
     padding: 20px 10px;
 }
+
 .wrap-tag-name{
     display: flex;
     justify-content: space-between;
@@ -296,6 +308,7 @@ main {
     background-repeat: no-repeat;
     cursor: pointer;
 }
+
 .btn-attr-delete{
     position: absolute;
     background-image: url(../resource/attr-delete.png);
