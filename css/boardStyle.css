@@ -48,7 +48,7 @@ body {
     outline: none;
 }
 
-.warp-btn-menu {
+.wrap-btn-menu {
     display: flex;
     align-items: center;
     gap:20px;
@@ -108,7 +108,7 @@ main {
     background-color: #E0E0E0;
 }
 
-.warp-search {
+.wrap-search {
     position: relative;
     margin-bottom: 10px;
 }
@@ -169,14 +169,14 @@ main {
     display: none;
 }
 
-.warp-tag {
+.wrap-tag {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 20px;
 }
 
-.btn-tag-item, .warp-tag li{
+.btn-tag-item, .wrap-tag li{
     border: none;
     border-radius: 20px;
     font-size: 20px;

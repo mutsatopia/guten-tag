@@ -2,7 +2,7 @@ const btnAll = document.querySelector("#btn-all");
 const btnInline = document.querySelector("#btn-inline");
 const btnBlock = document.querySelector("#btn-block");
 const btnSemantic = document.querySelector("#btn-semantic");
-const wrapTag = document.querySelector(".warp-tag");
+const wrapTag = document.querySelector(".wrap-tag");
 
 // 태그 선택 바에서 태그 버튼을 클릭할 때 이벤트 핸들러
 const tagClickHandler = (data) => {
