@@ -21,15 +21,14 @@ const board = {
   },
 
   // 너비 우선 탐색으로 body에서부터 children을 통해 Tag 객체를 찾아서 반환
-  // DOM요소만 가지고 그 DOM 요소에 해당하는 Tag 객체를 찾을 때 사용
-  searchElem(target, start = this.body) {
+  getTag(condition, start = this.body) {
     const visited = new Map();
     const queue = [start];
     let tag;
 
     while (queue.length) {
       tag = queue.shift();
-      if (tag.elem === target) return tag;
+      if (condition(tag)) return tag;
       if (!visited.has(tag)) {
         visited.set(tag, null);
         queue.push(...tag.children);
@@ -38,20 +37,17 @@ const board = {
     return null;
   },
 
-  searchByLocation(event, start = this.body) {
-    const visited = new Map();
-    const queue = [start];
-    let tag;
+  // event.target으로 그 DOM 요소에 해당하는 Tag 객체 반환
+  searchByElem(event, start = this.body) {
+    const { target } = event;
+    const condition = (tag) => tag.elem === target;
+    return this.getTag(condition, start);
+  },
 
-    while (queue.length) {
-      tag = queue.shift();
-      if (this.isInside(tag, this.getOffset(event))) return tag;
-      if (!visited.has(tag)) {
-        visited.set(tag, null);
-        queue.push(...tag.children);
-      }
-    }
-    return null;
+  // 현재 마우스가 어떤 태그 DOM 요소 위에 있는지 찾아서 해당하는 Tag 객체 반환
+  searchByLocation(event, start = this.body) {
+    const condition = (tag) => this.isInside(tag, this.getOffset(event));
+    return this.getTag(condition, start);
   },
 
   // 현재 시점에서의 보드 DOM 요소의 width, height를 반환
@@ -110,8 +106,7 @@ const clickHandler = (event) => {
     ready.setPos(x, y, grid);
     ready.setState("located");
   } else {
-    const { target } = event;
-    board.selected = board.searchElem(target);
+    board.selected = board.searchByElem(event);
     board.selected.setState("selected");
   }
 };
