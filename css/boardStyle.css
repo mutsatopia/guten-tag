@@ -9,15 +9,24 @@
 
 body {
     background-color: #eee;
+    overflow: hidden;
 }
 
-/* header */
+/* header 시작 */
 .header-menu-bar {
     display: flex;
     justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 35px;
     padding: 20px;
+    overflow-y: hidden;
     background-color: #fff;
     box-shadow: 0px 2px 0px rgba(0,0,0,.1);
+    z-index: 10;
+
 }
 
 .link-logo {
@@ -39,7 +48,7 @@ body {
     outline: none;
 }
 
-.warp-btn-menu {
+.wrap-btn-menu {
     display: flex;
     align-items: center;
     gap:20px;
@@ -70,20 +79,25 @@ body {
 .bi-file-earmark-text-fill {
     color: #fff;
 }
+/* header 끝 */
 
-/* 사이드 메뉴 */
+
+/* main 시작 */
 main {
-    margin-top: 2px;
+    margin-top: 75px;
 }
 
-.warp-side {
+.cont-board, .wrap-side {
     display: flex;
 }
+
+/* aside - 검색바 */
 .btn-search {
     background: none;
     border: none;
     cursor: pointer;
 }
+
 .side-btn-list {
     display: flex;
     flex-direction: column;
@@ -94,7 +108,7 @@ main {
     background-color: #E0E0E0;
 }
 
-.warp-search {
+.wrap-search {
     position: relative;
     margin-bottom: 10px;
 }
@@ -115,6 +129,7 @@ main {
     box-sizing: border-box;
 }
 
+/* aside - 태그 선택창 */
 .wrap-filter {
     display: flex;
     justify-content: space-around;
@@ -154,7 +169,7 @@ main {
     display: none;
 }
 
-.warp-tag {
+.wrap-tag {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -170,7 +185,10 @@ main {
     text-align: center;
     box-sizing: border-box;
 }
+/* aside 끝 */
 
+
+/* board 시작 */
 .board {
     display: flex;
     justify-content: center;
@@ -209,4 +227,4 @@ main {
 
 .click-tag {
     border: 2px solid black;
-  }
+}
