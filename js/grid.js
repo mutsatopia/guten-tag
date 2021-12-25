@@ -1,4 +1,5 @@
 const grid = {
+  elem: document.createElement('div'),
   size: 32,
   color: "rgba(0, 0, 0, 0.15)",
   
@@ -6,8 +7,6 @@ const grid = {
   // grid가 정의된 시점에서 아직 board가 정의되지 않아 참조할 수 없음
   // 그래서 board.init()할 때 grid.init()도 같이 해 주고,
   // board를 전역 변수로 참조하는게 아니라 이 시점에서 grid.board에 board를 할당한다.
-
-  // 격자를 표현하는 선들을 담을 DOM 요소 생성한다.
   init(board) {
     this.board = board;
     this.elem = document.createElement('div');
