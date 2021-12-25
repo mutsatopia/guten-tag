@@ -1,4 +1,5 @@
 const grid = {
+  elem: document.createElement('div'),
   size: 32,
   color: "rgba(0, 0, 0, 0.15)",
   
@@ -10,7 +11,6 @@ const grid = {
   // 격자를 표현하는 선들을 담을 DOM 요소 생성한다.
   init(board) {
     this.board = board;
-    this.elem = document.createElement('div');
     this.elem.classList.add('board-grid');
     setElemPos(this.elem, 0, 0);
   },
