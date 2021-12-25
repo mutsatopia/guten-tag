@@ -97,14 +97,20 @@ const board = {
   // ready 태그를 해제
   // 1. ready 태그 삭제
   // 2. 태그 선택 바에서 선택된 태그 해제
-  clearReady() {
+  clearReady(del = true) {
     if (!this.ready) return;
-    this.delete(this.ready);
+    if (del) this.delete(this.ready);
     const tags = document.querySelectorAll(".wrap-tag > li");
     [...tags]
       .find(tag => tag.textContent === this.ready.tagName)
       .classList.remove("click-tag");
     this.ready = null;
+  },
+
+  locate(tag, event) {
+    const parent = this.searchByLocation(event);
+    parent.children.push(tag);
+    tag.parent = parent;
   }
 };
 
@@ -112,11 +118,13 @@ const board = {
 // board의 ready값이 존재 -> 태그 선택 바에서 태그를 선택한 상태
 // 그렇지 않은 경우 -> 보드에 표시된 태그를 선택한 상태
 const clickHandler = (event) => {
+  const parent = board.searchByLocation(event);
+  if (!parent) return;
   const { ready } = board;
   if (ready) {
-    const [ x, y ] = board.getOffset(event);
-    ready.setPos(x, y, grid);
     ready.setState("located");
+    board.locate(ready, event);
+    board.clearReady(false);
   } else {
     board.selected = board.searchByLocation(event);
     board.selected?.setState("selected");
@@ -129,24 +137,21 @@ const mouseoverHandler = (event) => {
   cursor.setPos(event);
   const { ready } = board;
   if (!ready) return;
-  const [ x, y ] = board.getOffset(event);
-  ready.setPos(x, y, grid);
   ready.show();
 };
 
 // 마우스가 보드 안에서 움직일 때 이벤트 핸들러
 const mousemoveHandler = (event) => {
   cursor.setPos(event);
-  const { ready, body } = board;
+  const { ready } = board;
   const { size } = grid;
   if (!ready) return;
   const parent = board.searchByLocation(event);
-  if (parent === body && ready.keyword.includes("block")) {
-    const [ _, y ] = board.getOffset(event);
-    ready.setSize(body.width - size * 2 + 1, size * 3 + 1);
-    ready.setPos(body.x + size, y, grid);
+  const [ x, y ] = board.getOffset(event);
+  if (parent && ready.keyword.includes("block")) {
+    ready.setSize(parent.width - size * 2 + 1, size * 3 + 1);
+    ready.setPos(parent.x + size, y, grid);
   } else {
-    const [ x, y ] = board.getOffset(event);
     ready.setSize(size * 6 + 1, size * 3 + 1);
     ready.setPos(x, y, grid);
   }
@@ -186,4 +191,4 @@ const keydownHandler = ({ key }) => {
 
 document.addEventListener("keydown", keydownHandler);
 
-board.init(1200, 800);
+board.init(1420, 800);

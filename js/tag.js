@@ -62,9 +62,10 @@ class Tag {
     this.state = state;
     switch (state) {
       case "ready":
-        this.elem.style.opacity = "0.4";
+        this.elem.style.opacity = 0.4;
         break;
       case "located":
+        this.elem.style.opacity = 1;
       case "selected":
     }
   }
