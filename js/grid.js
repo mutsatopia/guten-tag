@@ -1,4 +1,5 @@
 const grid = {
+  elem: document.createElement("div"),
   size: 32,
   color: "rgba(0, 0, 0, 0.15)",
   
@@ -10,22 +11,21 @@ const grid = {
   // 격자를 표현하는 선들을 담을 DOM 요소 생성한다.
   init(board) {
     this.board = board;
-    this.elem = document.createElement('div');
-    this.elem.classList.add('board-grid');
+    this.elem.classList.add("board-grid");
     setElemPos(this.elem, 0, 0);
   },
 
   // 격자 선 그리기
   getLine(index, isColumn = false) {
-    const line = document.createElement('div');
+    const line = document.createElement("div");
     line.style.borderColor = this.color;
     
     if (isColumn) {
-      line.classList.add('line-column');
+      line.classList.add("line-column");
       setElemSize(line, 1, this.board.height);
       setElemPos(line, index * this.size + this.marginX, 0);
     } else {
-      line.classList.add('line-row');
+      line.classList.add("line-row");
       setElemSize(line, this.board.width, 1);
       setElemPos(line, 0, index * this.size + this.marginY);
     }

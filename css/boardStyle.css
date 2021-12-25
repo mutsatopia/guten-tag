@@ -214,6 +214,14 @@ main {
     box-sizing: border-box;
 }
 
+.cursor {
+    position: absolute;
+    z-index: 10;
+    width: 15px;
+    height: 15px;
+    background: url("../resource/cursor.svg") no-repeat;
+}
+
 .tag {
     display: flex;
     justify-content: center;

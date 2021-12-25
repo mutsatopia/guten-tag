@@ -3,21 +3,21 @@ const board = {
   body: new Tag({ tagName: "body", keyword: [], attr: [] }, { state: "located" }),
   ready: null, // 태그 선택 창에서 선택한 요소
   selected: null,
-  grid,
 
   // board 초기화
   // 1. body 생성 및 초기화
   // 2. grid 초기화
   // 3. body 화면에 표시
   init(width, height) {
+    cursor.init(this);
     this.elem.appendChild(this.body.elem);
-    this.grid.init(this);
-    const { size } = this.grid;
+    grid.init(this);
+    const { size } = grid;
     [ width, height ] = [ trim(width, size), trim(height, size) ];
     this.body.setSize(width, height);
     this.body.show();
-    this.grid.paintGrid();
-    this.body.setPos((this.width - width) / 2, (this.height - height) / 2, this.grid);
+    grid.paintGrid();
+    this.body.setPos((this.width - width) / 2, (this.height - height) / 2, grid);
   },
 
   // 현재 시점에서의 보드 DOM 요소의 width, height를 반환
@@ -94,9 +94,16 @@ const board = {
     if (children) children.splice(children.indexOf(tag), 1);
   },
 
+  // ready 태그를 해제
+  // 1. ready 태그 삭제
+  // 2. 태그 선택 바에서 선택된 태그 해제
   clearReady() {
     if (!this.ready) return;
     this.delete(this.ready);
+    const tags = document.querySelectorAll(".wrap-tag > li");
+    [...tags]
+      .find(tag => tag.textContent === this.ready.tagName)
+      .classList.remove("click-tag");
     this.ready = null;
   }
 };
@@ -118,6 +125,8 @@ const clickHandler = (event) => {
 
 // 마우스가 보드 밖에서 보드 안으로 들어갈 때 이벤트 핸들러
 const mouseoverHandler = (event) => {
+  cursor.show();
+  cursor.setPos(event);
   const { ready } = board;
   if (!ready) return;
   const [ x, y ] = board.getOffset(event);
@@ -127,6 +136,7 @@ const mouseoverHandler = (event) => {
 
 // 마우스가 보드 안에서 움직일 때 이벤트 핸들러
 const mousemoveHandler = (event) => {
+  cursor.setPos(event);
   const { ready, body } = board;
   const { size } = grid;
   if (!ready) return;
@@ -144,12 +154,14 @@ const mousemoveHandler = (event) => {
 
 // 마우스가 보드 안에서 바깥으로 나갈 때 이벤트 핸들러
 const mouseoutHandler = () => {
+  cursor.hide();
   const { ready } = board;
   if (!ready) return;
   ready.hide();
   ready.setState("none");
 };
 
+// 마우스 우클릭 이벤트 핸들러
 const mousedownHandler = (event) => {
   const { which, button } = event;
   if (which === 3 || button === 2) {
@@ -164,6 +176,7 @@ board.elem.addEventListener("mouseout", mouseoutHandler);
 board.elem.addEventListener("mousedown", mousedownHandler);
 board.elem.addEventListener("contextmenu", (event) => event.preventDefault());
 
+// 키보드 이벤트 핸들러
 const keydownHandler = ({ key }) => {
   switch (key) {
     case "Escape":

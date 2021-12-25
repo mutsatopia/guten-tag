@@ -6,10 +6,22 @@ const wrapTag = document.querySelector(".wrap-tag");
 
 // 태그 선택 바에서 태그 버튼을 클릭할 때 이벤트 핸들러
 const tagClickHandler = (data) => {
-  return () => board.add(data);
+  return (event) => {
+    const { target } = event;
+    const tags = document.querySelectorAll(".wrap-tag > li");
+    tags.forEach((el) => {
+      el.classList.remove("click-tag");
+    });
+    target.classList.toggle("click-tag");
+    if (target.textContent === board.ready?.tagName) {
+      board.clearReady();
+    } else {
+      board.add(data);
+    }
+  };
 };
 
-const randerTags = function (arr, cls) {
+const renderTags = function (arr, cls) {
   return function () {
     wrapTag.innerHTML = "";
     const fragment = document.createDocumentFragment();
@@ -19,7 +31,7 @@ const randerTags = function (arr, cls) {
         let item = document.createElement("li");
         let text = document.createTextNode(tagName);
         item.appendChild(text);
-        item.addEventListener('click', tagClickHandler(data))
+        item.addEventListener("click", tagClickHandler(data))
         fragment.appendChild(item);
       }
     });
@@ -27,9 +39,9 @@ const randerTags = function (arr, cls) {
   };
 };
 
-btnAll.addEventListener("click", randerTags(tagData));
-btnInline.addEventListener("click", randerTags(tagData, "inline"));
-btnBlock.addEventListener("click", randerTags(tagData, "block"));
-btnSemantic.addEventListener("click", randerTags(tagData, "semantic"));
+btnAll.addEventListener("click", renderTags(tagData));
+btnInline.addEventListener("click", renderTags(tagData, "inline"));
+btnBlock.addEventListener("click", renderTags(tagData, "block"));
+btnSemantic.addEventListener("click", renderTags(tagData, "semantic"));
 
-randerTags(tagData)();
+renderTags(tagData)();
