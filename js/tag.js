@@ -70,10 +70,10 @@ class Tag {
   }
 
   show() {
-    this.elem.style.display = 'flex';
+    this.elem.style.display = "flex";
   }
 
   hide() {
-    this.elem.style.display = 'none';
+    this.elem.style.display = "none";
   }
 }

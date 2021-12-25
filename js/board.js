@@ -100,10 +100,10 @@ const board = {
   clearReady() {
     if (!this.ready) return;
     this.delete(this.ready);
-    const tags = document.querySelectorAll('.wrap-tag > li');
+    const tags = document.querySelectorAll(".wrap-tag > li");
     [...tags]
       .find(tag => tag.textContent === this.ready.tagName)
-      .classList.remove('click-tag');
+      .classList.remove("click-tag");
     this.ready = null;
   }
 };

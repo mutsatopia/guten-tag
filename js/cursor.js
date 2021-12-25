@@ -1,5 +1,5 @@
 const cursor = {
-  elem: document.createElement('div'),
+  elem: document.createElement("div"),
   size: 15,
 
   // cursor 초기화
