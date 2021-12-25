@@ -6,7 +6,19 @@ const wrapTag = document.querySelector(".wrap-tag");
 
 // 태그 선택 바에서 태그 버튼을 클릭할 때 이벤트 핸들러
 const tagClickHandler = (data) => {
-  return () => board.add(data);
+  return (event) => {
+    const { target } = event;
+    const tags = document.querySelectorAll('.wrap-tag > li');
+    tags.forEach((el) => {
+      el.classList.remove('click-tag');
+    });
+    target.classList.toggle('click-tag');
+    if (target.textContent === board.ready?.tagName) {
+      board.clearReady();
+    } else {
+      board.add(data);
+    }
+  };
 };
 
 const randerTags = function (arr, cls) {
