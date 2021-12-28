@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="wrap-filter">
-                    <button type="button" id="btn-all" class="btn-filter-tag">
+                    <button type="button" id="btn-all" class="btn-filter-tag selected">
                         전체
                     </button>
                     <button type="button" id="btn-semantic" class="btn-filter-tag">
@@ -81,14 +81,16 @@
                     </div>
                 </div>
 
-                <div class="wrap-attr-menu">
-                    <label for="attr-name" class="sr-only">속성 입력창</label>
-                    <input type="text" id="attr-name" class="input-attr-name">
-
-                    <label for="attr-user-custom" class="sr-only">사용자지정 속성의 이름 입력창</label>
-                    <input type="text" id="attr-user-custom" class="input-attr-user-custom">
-
-                    <button type="button" class="btn-attr-delete"></button>
+                <div class="wrap-attr-list">
+                    <div class="wrap-attr-menu">
+                        <label for="attr-name" class="sr-only">속성 입력창</label>
+                        <input type="text" id="attr-name" class="input-attr-name">
+    
+                        <label for="attr-user-custom" class="sr-only">사용자지정 속성의 이름 입력창</label>
+                        <input type="text" id="attr-user-custom" class="input-attr-user-custom">
+    
+                        <button type="button" class="btn-attr-delete"></button>
+                    </div>
                 </div>
 
                 <button type="button" class="btn-attr-add"></button>
@@ -108,6 +110,7 @@
     <script src="js/renderTags.js"></script>
     <script src="js/selectTags.js"></script>
     <script src="js/searchFilter.js"></script>
+    <script src="js/aside.js"></script>
 </body>
 
 </html>
