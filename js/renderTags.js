@@ -4,6 +4,20 @@ const btnBlock = document.querySelector("#btn-block");
 const btnSemantic = document.querySelector("#btn-semantic");
 const wrapTag = document.querySelector(".wrap-tag");
 
+const btnFilters = document.querySelectorAll(".btn-filter-tag");
+//버튼 터치 시 볼드
+btnFilters.forEach((targetBtn)=>{
+  targetBtn.addEventListener("click",()=>{
+    targetBtn.classList.add("selected");
+
+    btnFilters.forEach((btn)=>{
+      if(btn!==targetBtn){
+        btn.classList.remove("selected");
+      }
+    });
+  });
+})
+
 // 태그 선택 바에서 태그 버튼을 클릭할 때 이벤트 핸들러
 const tagClickHandler = (data) => {
   return (event) => {

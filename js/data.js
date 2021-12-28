@@ -5,6 +5,16 @@ const tagData = [
     attr: [],
   },
   {
+    tagName: "p",
+    keyword: ["block"],
+    attr: [],
+  },
+  {
+    tagName: "span",
+    keyword: ["inline"],
+    attr: [],
+  },
+  {
     tagName: "a",
     keyword: ["inline"],
     attr: ['href'],
@@ -15,7 +25,12 @@ const tagData = [
     attr: ['src', 'alt'],
   },
   {
-    tagName: "p",
+    tagName: "ul",
+    keyword: ["block"],
+    attr: [],
+  },
+  {
+    tagName: "ol",
     keyword: ["block"],
     attr: [],
   },
@@ -25,92 +40,12 @@ const tagData = [
     attr: [],
   },
   {
-    tagName: "ul",
-    keyword: ["block"],
-    attr: [],
-  },
-  {
-    tagName: "h2",
-    keyword: ["block"],
-    attr: [],
-  },
-  {
-    tagName: "input",
-    keyword: ["block"],
-    attr: ['type'],
-  },
-  {
-    tagName: "h1",
-    keyword: ["block"],
-    attr: ['type'],
-  },
-  {
-    tagName: "form",
-    keyword: ["block"],
-    attr: ['action'],
-  },
-  {
-    tagName: "h3",
-    keyword: ["block"],
-    attr: [],
-  },
-  {
-    tagName: "nav",
-    keyword: ["block", "semantic"],
-    attr: [],
-  },
-  {
-    tagName: "footer",
-    keyword: ["block", "semantic"],
-    attr: [],
-  },
-  {
     tagName: "header",
     keyword: ["block", "semantic"],
     attr: [],
   },
   {
-    tagName: "iframe",
-    keyword: ["block"],
-    attr: ['src'],
-  },
-  {
-    tagName: "button",
-    keyword: ["block"],
-    attr: ['type', 'onclick'],
-  },
-  {
-    tagName: "strong",
-    keyword: ["inline"],
-    attr: [],
-  },
-  {
-    tagName: "i",
-    keyword: ["inline"],
-    attr: [],
-  },
-  {
-    tagName: "article",
-    keyword: ["block", "semantic"],
-    attr: [],
-  },
-  {
-    tagName: "aside",
-    keyword: ["block", "semantic"],
-    attr: [],
-  },
-  {
-    tagName: "details",
-    keyword: ["block", "semantic"],
-    attr: [],
-  },
-  {
-    tagName: "figcaption",
-    keyword: ["block", "semantic"],
-    attr: [],
-  },
-  {
-    tagName: "figure",
+    tagName: "nav",
     keyword: ["block", "semantic"],
     attr: [],
   },
@@ -120,12 +55,22 @@ const tagData = [
     attr: [],
   },
   {
-    tagName: "mark",
-    keyword: ["inline", "semantic"],
+    tagName: "aside",
+    keyword: ["block", "semantic"],
     attr: [],
   },
   {
     tagName: "section",
+    keyword: ["block", "semantic"],
+    attr: [],
+  },
+  {
+    tagName: "article",
+    keyword: ["block", "semantic"],
+    attr: [],
+  },
+  {
+    tagName: "footer",
     keyword: ["block", "semantic"],
     attr: [],
   },
@@ -135,72 +80,52 @@ const tagData = [
     attr: [],
   },
   {
-    tagName: "time",
+    tagName: "details",
+    keyword: ["block", "semantic"],
+    attr: [],
+  },
+  {
+    tagName: "figure",
+    keyword: ["block", "semantic"],
+    attr: [],
+  },
+  {
+    tagName: "figcaption",
+    keyword: ["block", "semantic"],
+    attr: [],
+  },
+  {
+    tagName: "mark",
     keyword: ["inline", "semantic"],
     attr: [],
   },
   {
-    tagName: "address",
+    tagName: "h1",
+    keyword: ["block"],
+    attr: ['type'],
+  },
+  {
+    tagName: "h2",
     keyword: ["block"],
     attr: [],
   },
   {
-    tagName: "span",
-    keyword: ["inline"],
-    attr: [],
-  },
-  {
-    tagName: "b",
-    keyword: ["inline"],
-    attr: [],
-  },
-  {
-    tagName: "em",
-    keyword: ["inline"],
-    attr: [],
-  },
-  {
-    tagName: "small",
-    keyword: ["inline"],
-    attr: [],
-  },
-  {
-    tagName: "bdi",
-    keyword: ["inline"],
-    attr: [],
-  },
-  {
-    tagName: "u",
-    keyword: ["inline"],
-    attr: [],
-  },
-  {
-    tagName: "sup",
-    keyword: ["inline"],
-    attr: [],
-  },
-  {
-    tagName: "abbr",
-    keyword: ["inline"],
-    attr: [],
-  },
-  {
-    tagName: "code",
-    keyword: ["inline"],
-    attr: [],
-  },
-  {
-    tagName: "label",
-    keyword: ["inline"],
-    attr: [],
-  },
-  {
-    tagName: "textarea",
+    tagName: "h3",
     keyword: ["block"],
     attr: [],
   },
   {
-    tagName: "select",
+    tagName: "h4",
+    keyword: ["block"],
+    attr: [],
+  },
+  {
+    tagName: "h5",
+    keyword: ["block"],
+    attr: [],
+  },
+  {
+    tagName: "h6",
     keyword: ["block"],
     attr: [],
   },
@@ -210,8 +135,68 @@ const tagData = [
     attr: [],
   },
   {
-    tagName: "ol",
+    tagName: "form",
     keyword: ["block"],
+    attr: ['action'],
+  },
+  {
+    tagName: "label",
+    keyword: ["inline"],
+    attr: [],
+  },
+  {
+    tagName: "input",
+    keyword: ["block"],
+    attr: ['type'],
+  },
+  {
+    tagName: "button",
+    keyword: ["block"],
+    attr: ['type', 'onclick'],
+  },
+  {
+    tagName: "select",
+    keyword: ["block"],
+    attr: [],
+  },
+  {
+    tagName: "strong",
+    keyword: ["inline"],
+    attr: [],
+  },
+  {
+    tagName: "b",
+    keyword: ["inline"],
+    attr: [],
+  },
+  {
+    tagName: "i",
+    keyword: ["inline"],
+    attr: [],
+  },
+  {
+    tagName: "em",
+    keyword: ["inline"],
+    attr: [],
+  },
+  {
+    tagName: "u",
+    keyword: ["inline"],
+    attr: [],
+  },
+  {
+    tagName: "textarea",
+    keyword: ["block"],
+    attr: [],
+  },
+  {
+    tagName: "address",
+    keyword: ["block"],
+    attr: [],
+  },
+  {
+    tagName: "small",
+    keyword: ["inline"],
     attr: [],
   },
   {
@@ -227,6 +212,26 @@ const tagData = [
   {
     tagName: "dd",
     keyword: ["block"],
+    attr: [],
+  },
+  {
+    tagName: "iframe",
+    keyword: ["block"],
+    attr: ['src'],
+  },
+  {
+    tagName: "sup",
+    keyword: ["inline"],
+    attr: [],
+  },
+  {
+    tagName: "abbr",
+    keyword: ["inline"],
+    attr: [],
+  },
+  {
+    tagName: "code",
+    keyword: ["inline"],
     attr: [],
   },
 ];
