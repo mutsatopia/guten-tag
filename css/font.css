@@ -17,6 +17,6 @@ http://scripts.sil.org/OFL
 	src: local("Pretendard Variable"), url("../fonts/PretendardVariable.woff2") format("woff2-variations");
 }
 
-body, button, input {
+body, button, input, li {
 	font-family: "Pretendard Variable", sans-serif;
 }
