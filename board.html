@@ -24,17 +24,25 @@
 
         <input type="text" id="title" placeholder="✎ 문서 제목을 입력하세요" class="input-title" />
 
-        <div class="wrap-btn-menu">
-            <button type="button" class="btn-headmenu palette">
+        <ul class="wrap-btn-menu">
+            <li type="button" id="btn-palette" class="btn-headmenu">
                 <i class="bi bi-palette-fill"></i> 테마
-            </button>
-            <button type="button" class="btn-headmenu grid">
+                <button type="button" class="btn-theme-open"></button>
+                <ul class="list-theme-container">
+                    <li><button type="button" class="btn-theme theme-one"></button></li>
+                    <li><button type="button" class="btn-theme theme-two"></button></li>
+                    <li><button type="button" class="btn-theme theme-three"></button></li>
+                    <li><button type="button" class="btn-theme theme-four"></button></li>
+                </ul>
+                <button type="button" class="btn-theme-user-custom">사용자 지정</button>
+            </li>
+            <li type="button" class="btn-headmenu grid">
                 <i class="bi bi-grid-3x3"></i> 격자
-            </button>
-            <button type="button" class="btn-headmenu file">
+            </li>
+            <li type="button" class="btn-headmenu file">
                 <i class="bi bi-file-earmark-text-fill"></i> 추출
-            </button>
-        </div>
+            </li>
+        </ul>
     </header>
 
     <main class="cont-board">
@@ -111,6 +119,7 @@
     <script src="js/searchFilter.js"></script>
     <script src="js/aside.js"></script>
     <script src="js/attrCustom.js"></script>
+    <script src="js/theme.js"></script>
 </body>
 
 </html>

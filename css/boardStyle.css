@@ -22,10 +22,10 @@ body {
     right: 0;
     height: 35px;
     padding: 20px;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     background-color: #fff;
     box-shadow: 0px 2px 0px rgba(0,0,0,.1);
-    overflow: hidden;
+    /* overflow: hidden; */
     z-index: 10;
 }
 
@@ -60,11 +60,72 @@ body {
 }
 
 .btn-headmenu {
-    padding: 0 15px 0 15px;
+    width: 85px;
+    height: 30px;
     background-color: #e0e0e0;
     border: none;
     border-radius: 5px;
     line-height: 30px;
+    text-align: center;
+    overflow: hidden;
+    transition: 0.4s;
+}
+.btn-theme-open{
+    position: absolute;
+    width: 85px;
+    height: 30px;
+    border: none;
+    background:none;
+    right: 230px;
+    cursor: pointer;
+}
+
+.btn-headmenu.palette{
+    padding-bottom: 115px;
+    margin-top: 115px;
+}
+
+.list-theme-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 5px;
+    padding: 5px 0;
+    border-bottom: 1px solid #808080;
+}
+
+.btn-theme{
+    width: 25px;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+    background-color: inherit;
+    background-image: url(../resource/graytheme.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.theme-one{
+    background-image: url(../resource/pinktheme.png);
+}
+.theme-two{
+    background-image: url(../resource/greentheme.png);
+}
+.theme-three{
+    background-image: url(../resource/bluethme.png);
+}
+
+.btn-theme:hover{
+    outline: 1px solid #808080;
+}
+
+.btn-theme-user-custom{
+    
+    border: none;
+    background-color: inherit;
     cursor: pointer;
 }
 
@@ -84,6 +145,9 @@ body {
 .bi-file-earmark-text-fill {
     color: #fff;
 }
+
+
+
 /* header 끝 */
 
 
