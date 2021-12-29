@@ -121,7 +121,7 @@ main {
     background-color: #E0E0E0;
 }
 
-.input-tag-search {
+.input-tag-search, .input-attr-name, .input-attr-user-custom {
     max-width: 185px;
     height: 30px;
     padding : 0 30px 0 8px;
@@ -133,11 +133,15 @@ main {
     transition: background-color 0.2s ease;
 }
 
-.input-tag-search:hover, .input-tag-search:focus {
+.input-tag-search:hover, .input-tag-search:focus,
+.input-attr-name:hover, .input-attr-name:focus,
+.input-attr-user-custom:hover, .input-attr-user-custom:focus {
     background-color: #e0e0e0;
 }
 
-.input-tag-search:focus {
+.input-tag-search:focus,
+.input-attr-name:focus,
+.input-attr-user-custom:focus {
     outline: none;
 }
 
@@ -276,6 +280,7 @@ main {
 
 .btn-trash, .btn-child-open {
     margin-top: 3px;
+    margin-right: -3px;
     border: none;
     background-color: inherit;
     cursor: pointer;
@@ -285,6 +290,7 @@ main {
     border-radius: 50%;
     padding: 5px;
     font-size: 16px;
+    transition: all 0.2s ease;
 }
 
 .bi-trash:hover {
@@ -306,11 +312,12 @@ main {
 .wrap-attr-menu{
     display: none;
     position: relative;
+    padding: 20px 18px;
     flex-direction: column;
     border-bottom: 1px solid #eee;
 }
 
-.wrap-tag-name, .wrap-attr-menu{
+.wrap-tag-name {
     padding: 20px 10px;
 }
 
@@ -331,25 +338,26 @@ main {
     background: none;
 }
 
-.wrap-tag-name{
+.wrap-tag-name {
     display: flex;
     justify-content: space-between;
     background-color: #eee;
 }
 
-.input-attr-name, .input-attr-user-custom{
+.input-attr-name, .input-attr-user-custom {
     line-height: 20px;
-    border: 1px solid #666;
-    border-radius: 5px;
+    font-size: 13px;
 }
 
-.input-attr-name{
+.input-attr-name {
     position: relative;
-    width: 50%;
+    width: 65%;
     margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 500;
 }
 
-.btn-attr-delete, .btn-attr-add{
+.btn-attr-delete, .btn-attr-add {
     width: 18px;
     height: 18px;
     border: none;
