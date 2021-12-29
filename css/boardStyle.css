@@ -262,18 +262,33 @@ main {
 
 /* 어트리뷰트 */
 .text-select-tag-name{
+    margin: 5px 0 0 5px;
+    font-family: 'Black Han Sans', sans-serif;
     font-size: 20px;
-    font-weight: bold;
 }
 
-.btn-trash, .btn-child-open{
+.text-select-tag-name::before {
+    content: "<"
+}
+.text-select-tag-name::after {
+    content: ">"
+}
+
+.btn-trash, .btn-child-open {
+    margin-top: 3px;
     border: none;
     background-color: inherit;
     cursor: pointer;
 }
 
-.bi-trash{
+.bi-trash {
+    border-radius: 50%;
+    padding: 5px;
     font-size: 16px;
+}
+
+.bi-trash:hover {
+    background-color: #e0e0e0;
 }
 
 .btn-child-open{
@@ -335,28 +350,38 @@ main {
 }
 
 .btn-attr-delete, .btn-attr-add{
-    width: 17px;
-    height: 17px;
+    width: 18px;
+    height: 18px;
     border: none;
+    border-radius: 50%;
     background-color: inherit;
+    background-size: cover;
     background-repeat: no-repeat;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.btn-attr-delete{
+.btn-attr-delete {
     position: absolute;
-    background-image: url(../resource/attr-delete.png);
-    right: 10px;
-    
+    background-image: url(../resource/dash-circle.svg);
+    right: 5px;
 }
 
-.btn-attr-add{
-    margin: 20px 0 0 10px;
-    background-image: url(../resource/attr-add.png);
+.btn-attr-delete:hover {
+    background-image: url(../resource/dash-circle_hover.svg);
+}
+
+.btn-attr-add {
+    margin: 20px 0 0 15px;
+    background-image: url(../resource/plus-circle.svg);
+}
+
+.btn-attr-add:hover {
+    background-image: url(../resource/plus-circle_hover.svg);
 }
 
 
-.attr-list-container{
+.attr-list-container {
     display: flex;
     position: relative;
     flex-direction: column;
