@@ -121,7 +121,7 @@ main {
     background-color: #E0E0E0;
 }
 
-.input-tag-search {
+.input-tag-search, .input-attr-name, .input-attr-user-custom {
     max-width: 185px;
     height: 30px;
     padding : 0 30px 0 8px;
@@ -133,11 +133,15 @@ main {
     transition: background-color 0.2s ease;
 }
 
-.input-tag-search:hover, .input-tag-search:focus {
+.input-tag-search:hover, .input-tag-search:focus,
+.input-attr-name:hover, .input-attr-name:focus,
+.input-attr-user-custom:hover, .input-attr-user-custom:focus {
     background-color: #e0e0e0;
 }
 
-.input-tag-search:focus {
+.input-tag-search:focus,
+.input-attr-name:focus,
+.input-attr-user-custom:focus {
     outline: none;
 }
 
@@ -262,18 +266,35 @@ main {
 
 /* 어트리뷰트 */
 .text-select-tag-name{
+    margin: 5px 0 0 5px;
+    font-family: 'Black Han Sans', sans-serif;
     font-size: 20px;
-    font-weight: bold;
 }
 
-.btn-trash, .btn-child-open{
+.text-select-tag-name::before {
+    content: "<"
+}
+.text-select-tag-name::after {
+    content: ">"
+}
+
+.btn-trash, .btn-child-open {
+    margin-top: 3px;
+    margin-right: -3px;
     border: none;
     background-color: inherit;
     cursor: pointer;
 }
 
-.bi-trash{
+.bi-trash {
+    border-radius: 50%;
+    padding: 5px;
     font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.bi-trash:hover {
+    background-color: #e0e0e0;
 }
 
 .btn-child-open{
@@ -291,11 +312,12 @@ main {
 .wrap-attr-menu{
     display: none;
     position: relative;
+    padding: 20px 18px;
     flex-direction: column;
     border-bottom: 1px solid #eee;
 }
 
-.wrap-tag-name, .wrap-attr-menu{
+.wrap-tag-name {
     padding: 20px 10px;
 }
 
@@ -316,47 +338,58 @@ main {
     background: none;
 }
 
-.wrap-tag-name{
+.wrap-tag-name {
     display: flex;
     justify-content: space-between;
     background-color: #eee;
 }
 
-.input-attr-name, .input-attr-user-custom{
+.input-attr-name, .input-attr-user-custom {
     line-height: 20px;
-    border: 1px solid #666;
-    border-radius: 5px;
+    font-size: 13px;
 }
 
-.input-attr-name{
+.input-attr-name {
     position: relative;
-    width: 50%;
+    width: 65%;
     margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 500;
 }
 
-.btn-attr-delete, .btn-attr-add{
-    width: 17px;
-    height: 17px;
+.btn-attr-delete, .btn-attr-add {
+    width: 18px;
+    height: 18px;
     border: none;
+    border-radius: 50%;
     background-color: inherit;
+    background-size: cover;
     background-repeat: no-repeat;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.btn-attr-delete{
+.btn-attr-delete {
     position: absolute;
-    background-image: url(../resource/attr-delete.png);
-    right: 10px;
-    
+    background-image: url(../resource/dash-circle.svg);
+    right: 5px;
 }
 
-.btn-attr-add{
-    margin: 20px 0 0 10px;
-    background-image: url(../resource/attr-add.png);
+.btn-attr-delete:hover {
+    background-image: url(../resource/dash-circle_hover.svg);
+}
+
+.btn-attr-add {
+    margin: 20px 0 0 15px;
+    background-image: url(../resource/plus-circle.svg);
+}
+
+.btn-attr-add:hover {
+    background-image: url(../resource/plus-circle_hover.svg);
 }
 
 
-.attr-list-container{
+.attr-list-container {
     display: flex;
     position: relative;
     flex-direction: column;
