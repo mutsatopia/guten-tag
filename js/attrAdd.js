@@ -10,7 +10,7 @@ attrInput.addEventListener('focusout', addAttr)
 const attrArr = [
   {
     title: 'href',
-    attr: 'www.sival.com'
+    attr: 'www.gutentag.com'
   },
   {
     title: 'type',
