@@ -297,6 +297,23 @@ main {
     padding: 20px 10px;
 }
 
+.wrap-tag::-webkit-scrollbar, .wrap-attr-list::-webkit-scrollbar {
+    width: 12px;
+}
+
+.wrap-tag::-webkit-scrollbar-thumb, .wrap-attr-list::-webkit-scrollbar-thumb {
+    width: 4px;
+    height: 79px;
+    background-color: #eee;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 4px solid transparent;
+}
+
+.wrap-tag::-webkit-scrollbar-trac, .wrap-attr-list::-webkit-scrollbar-track {
+    background: none;
+}
+
 .wrap-tag-name{
     display: flex;
     justify-content: space-between;
