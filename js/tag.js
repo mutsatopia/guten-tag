@@ -86,6 +86,7 @@ class Tag {
         if (args) this.pushingSibling = args[0];
         break;
       case "selected":
+        this.elem.classList.add('selected-tag');
     }
   }
 

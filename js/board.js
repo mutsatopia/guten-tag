@@ -14,7 +14,7 @@ const board = {
     grid.init(this);
     const { size } = grid;
     [ width, height ] = [ trim(width, size), trim(height, size) ];
-    this.body.setSize(width, height);
+    this.body.setSize(width + 1, height + 1);
     this.body.show();
     grid.paintGrid();
     this.body.setPos((this.width - width) / 2, (this.height - height) / 2);
@@ -149,11 +149,11 @@ const board = {
   },
 
   // ready 상태의 Tag 객체를 located 상태로 변경
-  locate(tag, event) {
+  locate(event) {
     this.ready.setState("located");
     const parent = this.searchByLocation(event);
-    parent.children.push(tag);
-    tag.parent = parent;
+    parent.children.push(this.ready);
+    this.ready.parent = parent;
     parent.setState("located");
     this.clearReady(false, false);
     this.forEach(tag => {
@@ -161,6 +161,23 @@ const board = {
         tag.setState("located");
       }
     });
+  },
+
+  select(event) {
+    const nextSelected = this.searchByLocation(event);
+    if (nextSelected === this.selected || !nextSelected) {
+      this.selected?.setState("located");
+      this.selected?.elem?.classList?.remove('selected-tag');
+      this.selected = null;
+    } else if (this.selected) {
+      this.selected.setState("located");
+      this.selected.elem.classList.remove('selected-tag');
+      this.selected = nextSelected;
+      this.selected?.setState("selected");
+    } else {
+      this.selected = nextSelected;
+      this.selected?.setState("selected");
+    }
   },
 
   // ready 태그를 해제
@@ -255,13 +272,12 @@ const board = {
 // 그렇지 않은 경우 -> 보드에 표시된 태그를 선택한 상태
 const clickHandler = (event) => {
   const parent = board.searchByLocation(event);
-  if (!parent) return;
   const { ready } = board;
   if (ready) {
-    board.locate(ready, event);
+    if (!parent) return;
+    board.locate(event);
   } else {
-    board.selected = board.searchByLocation(event);
-    board.selected?.setState("selected");
+    board.select(event);
   }
 };
 
