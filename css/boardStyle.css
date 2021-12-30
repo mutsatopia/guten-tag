@@ -304,10 +304,12 @@ main {
     border: solid black;
     background-color: mistyrose;
     box-sizing: border-box;
+    transition: all .1s;
 }
 
 .board-grid {
     position: absolute;
+    z-index: 10;
 }
 
 .line-column {

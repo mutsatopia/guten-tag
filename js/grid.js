@@ -1,6 +1,6 @@
 const grid = {
   elem: document.createElement("div"),
-  size: 32,
+  size: 24,
   color: "rgba(0, 0, 0, 0.15)",
   
   // grid 초기화
