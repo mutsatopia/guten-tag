@@ -12,6 +12,15 @@ h1 {
     line-height: 1.3em;
 }
 
+.sr-only {
+	position: absolute;
+	clip: rect(0 0 0 0);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+}
+
 /* header */
 .header {
     position: relative;
@@ -96,19 +105,108 @@ h1 {
 }
 
 /* main */
-main {
-    height: 50vh;
+.cont-main {
+    margin: 50px auto 100px;
     background-color: #fff;
+    color: #403659;
     text-align: center;
 }
 
+.cont-main h2 {
+    margin-bottom: 0.4em;
+    font-weight: 700;
+    font-size: calc(15px + 4vw);
+}
+
+.cont-main em {
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0 10px;
+    min-width: 480px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.6em;
+}
+
+.cont-feat {
+    display: flex;
+    gap: 15px;
+    max-width: 1280px;
+    margin: 120px auto 150px;
+}
+
+.cont-feat li {
+    margin: 0 auto;
+    line-height: 1.6em;
+    font-weight: 500;
+}
+
+.cont-feat li img {
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.cont-feat strong {
+    font-weight: 700;
+    line-height: 2.5em;
+    font-size: 16px;
+}
+
 /* footer */
-footer {
+.jamen-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100px;
+    padding: 25px 15px 20px;
     background-color: #54578c;
     color: #fff;
+}
+
+.jamen-info h4 {
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.jamen-info p {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #CDC5C8;
+    margin-bottom: 5px;
+}
+
+.jamen-info p strong {
+    font-weight: 700;
+}
+
+.jamen-member {
+    display: flex;
+    margin-top: 15px;
+    gap: 30px;
+    font-weight: 500;
+}
+
+.jamen-info small {
+    display: inline-block;
+    border-top: 1px solid #747699;
+    margin-top: 20px;
+    padding-top: 5px;
+}
+
+@media screen and (max-width:768px) {
+    .cont-main em {
+        font-size: 15px;
+        width: 70%;
+        min-width: auto;
+    }
+    br {
+        display: none;
+    }
+    .cont-feat {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .cont-feat li {
+        width: 70%;
+    }
 }
