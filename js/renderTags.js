@@ -51,29 +51,13 @@ const renderTags = function (arr, cls) {
         let item = document.createElement("li");
         let text = document.createTextNode(tagName);
         item.appendChild(text);
-        if(isFirst){
-          let clone = [theme.getRedColor,theme.getGreenColor,theme.getBlueColor]
-          let tagColorTheme = [...clone];
-      
-          tagColorTheme.forEach((colorNum,id)=>{
-          let randomColor = Math.floor(Math.random()*(70-1+1)) + 1;
-          colorNum+=randomColor;
-          tagColorTheme[id]=colorNum;
-          });
-          let color = `rgb(${tagColorTheme[0]},${tagColorTheme[1]},${tagColorTheme[2]})`;
-          item.style.backgroundColor = color;
-          themeSave.push([tagColorTheme[0],tagColorTheme[1],tagColorTheme[2]]);
+        if (isFirst) {
+          let { redColor, greenColor, blueColor } = theme;
+          const rgb = [redColor, greenColor, blueColor]
+            .map(color => color + Math.floor(Math.random()*(70-1+1)) + 1);
+          arr[index].color = rgb;
         }
-        else {
-          let clone = [...themeSave][index];
-          let tagColorTheme = [...clone];
-          tagColorTheme.forEach((colorNum,id)=>{
-            tagColorTheme[id]=colorNum;
-            });
-            let color = `rgb(${tagColorTheme[0]},${tagColorTheme[1]},${tagColorTheme[2]})`;
-            item.style.backgroundColor = color;
-        }
-        
+        item.style.backgroundColor = `rgb(${tagData[index].color.join(',')})`;
         item.addEventListener("click", tagClickHandler(data))
         fragment.appendChild(item);
       }
@@ -85,15 +69,10 @@ const renderTags = function (arr, cls) {
   };
 };
 
-
-
 const changeTheme = function(r,g,b){
   return function(){
-    theme.setRed=r;
-    theme.setGreen=g;
-    theme.setBlue=b;
+    theme.setColor(r, g, b);
     isFirst=true;
-    themeSave.splice(0);
     btnFilters.forEach((check)=>{
       if(check.id!=="btn-all"){
         check.classList.remove("selected");
@@ -103,7 +82,7 @@ const changeTheme = function(r,g,b){
     })
     renderTags(tagData)();
   }
-}  
+} 
 
 
 
