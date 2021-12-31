@@ -8,7 +8,7 @@ const pinkTheme = document.querySelector(".theme-one");
 const greenTheme = document.querySelector(".theme-two");
 const blueTheme = document.querySelector(".theme-three");
 const yellowTheme = document.querySelector(".theme-four");
-
+let isFirst = true;
 
 const btnFilters = document.querySelectorAll(".btn-filter-tag");
 //버튼 터치 시 볼드
@@ -45,38 +45,62 @@ const renderTags = function (arr, cls) {
   return function () {
     wrapTag.innerHTML = "";
     const fragment = document.createDocumentFragment();
-    arr.forEach((data) => {
+    arr.forEach((data,index) => {
       const { tagName, keyword } = data;
       if (!cls || keyword.includes(cls)) {
         let item = document.createElement("li");
         let text = document.createTextNode(tagName);
         item.appendChild(text);
-        
-        let clone = [theme.getRedColor,theme.getGreenColor,theme.getBlueColor]
-        let tagColorTheme = [...clone];
-  
-        tagColorTheme.forEach((colorNum,index)=>{
-          let randomColor = Math.floor(Math.random()*(90-1+1)) + 1;
+        if(isFirst){
+          let clone = [theme.getRedColor,theme.getGreenColor,theme.getBlueColor]
+          let tagColorTheme = [...clone];
+      
+          tagColorTheme.forEach((colorNum,id)=>{
+          let randomColor = Math.floor(Math.random()*(70-1+1)) + 1;
           colorNum+=randomColor;
-          tagColorTheme[index]=colorNum;
-        });
-        let color = `rgb(${tagColorTheme[0]},${tagColorTheme[1]},${tagColorTheme[2]})`;
-        item.style.backgroundColor = color;
-        
+          tagColorTheme[id]=colorNum;
+          });
+          let color = `rgb(${tagColorTheme[0]},${tagColorTheme[1]},${tagColorTheme[2]})`;
+          item.style.backgroundColor = color;
+          themeSave.push([tagColorTheme[0],tagColorTheme[1],tagColorTheme[2]]);
+        }
+        else {
+          let clone = [...themeSave][index];
+          let tagColorTheme = [...clone];
+          tagColorTheme.forEach((colorNum,id)=>{
+            tagColorTheme[id]=colorNum;
+            });
+            let color = `rgb(${tagColorTheme[0]},${tagColorTheme[1]},${tagColorTheme[2]})`;
+            item.style.backgroundColor = color;
+        }
         
         item.addEventListener("click", tagClickHandler(data))
         fragment.appendChild(item);
       }
     });
     wrapTag.appendChild(fragment);
+    if(isFirst){
+      isFirst=false;
+    }
   };
 };
+
+
 
 const changeTheme = function(r,g,b){
   return function(){
     theme.setRed=r;
     theme.setGreen=g;
     theme.setBlue=b;
+    isFirst=true;
+    themeSave.splice(0);
+    btnFilters.forEach((check)=>{
+      if(check.id!=="btn-all"){
+        check.classList.remove("selected");
+      }else{
+        check.classList.add("selected");
+      }
+    })
     renderTags(tagData)();
   }
 }  

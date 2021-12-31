@@ -309,7 +309,7 @@ main {
 
 .board-grid {
     position: absolute;
-    z-index: 10;
+    z-index: 9;
 }
 
 .line-column {

@@ -6,11 +6,9 @@ let theme = {
   get getRedColor(){
     return this.redColor;
   },
-  
   get getGreenColor(){
     return this.greenColor;
   },
-  
   get getBlueColor(){
     return this.blueColor;
   },
@@ -24,8 +22,10 @@ let theme = {
   set setBlue(value){
     this.blueColor=value;
   },
-
 }
+
+const themeSave = [];
+
 
 const tagData = [
   {
