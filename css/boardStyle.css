@@ -383,6 +383,10 @@ main {
     border-bottom: 1px solid #eee;
 }
 
+.wrap-attr-menu.on {
+    display: flex;
+}
+
 .wrap-tag-name {
     padding: 20px 10px;
 }
@@ -445,15 +449,31 @@ main {
     background-image: url(../resource/dash-circle_hover.svg);
 }
 
+.sect-attr-add {
+    height: 55px;
+    border-bottom: 1px solid #eee;
+}
+
+.sect-attr-add.on {
+    height: 0;
+}
+
+.sect-attr-add.on .btn-attr-add {
+    display: none;
+}
+
 .btn-attr-add {
-    margin: 20px 0 0 15px;
+    position: absolute;
+    top: 145px;
+    left: 270px;
+    z-index: 10;
+    margin: 15px 5px 0 auto;
     background-image: url(../resource/plus-circle.svg);
 }
 
 .btn-attr-add:hover {
     background-image: url(../resource/plus-circle_hover.svg);
 }
-
 
 .attr-list-container {
     display: flex;
