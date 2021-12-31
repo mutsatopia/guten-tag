@@ -302,14 +302,15 @@ main {
     top: 0;
     left: 0;
     border: solid black;
-    background-color: mistyrose;
+    background-color: rgb(226, 247, 255);
     box-sizing: border-box;
+    user-select: none;
     transition: all .1s;
 }
 
 .board-grid {
     position: absolute;
-    z-index: 10;
+    z-index: 9;
 }
 
 .line-column {
@@ -320,6 +321,10 @@ main {
 .line-row {
     position: absolute;
     border-top: 1px solid;
+}
+
+.selected-tag {
+    border-color: #ff5101;
 }
 
 .click-tag {
@@ -372,7 +377,7 @@ main {
 
 .wrap-attr-list {
     overflow: scroll;
-    height: calc(87vh - 76px);
+    height: calc(94vh - 76px);
 }
 
 .wrap-attr-menu{
@@ -381,6 +386,10 @@ main {
     padding: 20px 18px;
     flex-direction: column;
     border-bottom: 1px solid #eee;
+}
+
+.wrap-attr-menu.on {
+    display: flex;
 }
 
 .wrap-tag-name {
@@ -445,15 +454,38 @@ main {
     background-image: url(../resource/dash-circle_hover.svg);
 }
 
+.sect-attr-add {
+    display: flex;
+    align-items: center;
+    padding: 2px 0 0 20px;
+    font-size: 14px;
+    font-weight: 500;
+    height: 55px;
+    border-bottom: 1px solid #eee;
+}
+
+.sect-attr-add.on {
+    padding: 0;
+    height: 0;
+}
+
+.sect-attr-add.on .btn-attr-add,
+.sect-attr-add.on .txt-attr-add {
+    display: none;
+}
+
 .btn-attr-add {
-    margin: 20px 0 0 15px;
+    position: absolute;
+    top: 145px;
+    left: 270px;
+    z-index: 10;
+    margin: 15px 5px 0 auto;
     background-image: url(../resource/plus-circle.svg);
 }
 
 .btn-attr-add:hover {
     background-image: url(../resource/plus-circle_hover.svg);
 }
-
 
 .attr-list-container {
     display: flex;

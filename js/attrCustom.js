@@ -2,8 +2,8 @@ const addBtn = document.querySelector(".btn-attr-add");
 const attrContainer = document.querySelector(".attr-item-containers");
 const attrInput = document.querySelector(".input-attr-user-custom");
 const show = document.querySelector(".wrap-attr-menu");
+const sectionAdd = document.querySelector(".sect-attr-add");
 
-addBtn.addEventListener("click", customInput);
 attrInput.addEventListener("focusout", addAttr);
 
 const attrArr = [
@@ -14,10 +14,6 @@ const attrArr = [
     id:2, title:"type", attr:"button"
   }
 ];
-
-function customInput(){
-  show.style.display="flex"
-};
 
 function addAttr() {
   const elName = document.querySelector(".input-attr-name");
@@ -52,7 +48,8 @@ function addAttr() {
 
   elName.value = null;
   attr.value = null;
-  show.style.display="none";
+  sectionAdd.classList.remove("on");
+  show.classList.remove("on");
 };
 
 function attrRender(arr) {

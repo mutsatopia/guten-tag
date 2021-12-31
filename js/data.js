@@ -1,3 +1,32 @@
+let theme = {
+  redColor: 90,
+  greenColor: 219,
+  blueColor: 196,
+
+  get getRedColor(){
+    return this.redColor;
+  },
+  get getGreenColor(){
+    return this.greenColor;
+  },
+  get getBlueColor(){
+    return this.blueColor;
+  },
+
+  set setRed(value){
+    this.redColor=value;
+  },
+  set setGreen(value){
+    this.greenColor=value;
+  },
+  set setBlue(value){
+    this.blueColor=value;
+  },
+}
+
+const themeSave = [];
+
+
 const tagData = [
   {
     tagName: "div",

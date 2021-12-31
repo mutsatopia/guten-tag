@@ -71,6 +71,7 @@ class Tag {
     this.state = state;
     switch (state) {
       case "ready":
+      case "draggable":
         this.elem.style.opacity = 0.4;
         break;
       case "located":
@@ -86,6 +87,8 @@ class Tag {
         if (args) this.pushingSibling = args[0];
         break;
       case "selected":
+        this.elem.style.opacity = 1;
+        this.elem.classList.add('selected-tag');
     }
   }
 
@@ -117,25 +120,35 @@ class Tag {
       this.setPos(x, y);
     }
     if (parent) {
-      const { children } = parent;
-      const bottomY = children
-        ? Math.max(this.y + this.height, ...children.map(tag => tag.y + tag.height))
-        : this.y + this.height;
-      // 자식 크기에 따라 부모 크기 조절
-      if (bottomY + size !== parent.y + parent.height) {
-        parent.setState("modified");
-        parent.setSize(null, bottomY + size - parent.y);
-      }
+      this.modifyParentSize(parent);
+      this.modifyChildrenPos(parent);
+    }
+  }
 
-      // 부모 위치 변경에 따라 자식 위치도 조절
-      if (children.length) {
-        children.forEach(tag => {
-          if (this.y < tag.y && this.y + this.height > tag.y) {
-            tag.setState("modified");
-            tag.setPos(null, this.y + this.height - 1);
-          }
-        });
-      }
+  // 자식 크기에 따라 부모 크기 조절
+  modifyParentSize(parent) {
+    const { children } = parent;
+    const { size } = grid;
+    const bottomY = children
+      ? Math.max(this.y + this.height, ...children.map(tag => tag.y + tag.height))
+      : this.y + this.height;
+    // 자식 크기에 따라 부모 크기 조절
+    if (bottomY + size !== parent.y + parent.height) {
+      parent.setState("modified");
+      parent.setSize(null, bottomY + size - parent.y);
+    }
+  }
+
+  // 부모 위치 변경에 따라 자식 위치도 조절
+  modifyChildrenPos(parent) {
+    const { children } = parent;
+    if (children.length) {
+      children.forEach(tag => {
+        if (this.y < tag.y && this.y + this.height > tag.y) {
+          tag.setState("modified");
+          tag.setPos(null, this.y + this.height - 1);
+        }
+      });
     }
   }
 }
