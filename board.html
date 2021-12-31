@@ -25,9 +25,9 @@
         <input type="text" id="title" placeholder="✎ 문서 제목을 입력하세요" class="input-title" />
 
         <ul class="wrap-btn-menu">
-            <li type="button" id="btn-palette" class="btn-headmenu">
+            <li id="btn-palette" class="btn-headmenu">
                 <i class="bi bi-palette-fill"></i> 테마
-                <button type="button" class="btn-theme-open"></button>
+                <button type="button" id="btn-open-theme" class="btn-menu-open"></button>
                 <ul class="list-theme-container">
                     <li><button type="button" class="btn-theme theme-one"></button></li>
                     <li><button type="button" class="btn-theme theme-two"></button></li>
@@ -36,10 +36,23 @@
                 </ul>
                 <button type="button" class="btn-theme-user-custom">사용자 지정</button>
             </li>
-            <li type="button" class="btn-headmenu grid">
+            <li id="btn-grid" class="btn-headmenu gird-menu">
                 <i class="bi bi-grid-3x3"></i> 격자
+                <button type="button" class="btn-menu-open"></button>
+                <ul class="list-grid-container">
+                    <li>
+                        <label for="grid-check" class="txt-grid-Whether">
+                            격자 표시<input type="checkbox" id="grid-check" class="inp-grid-check">
+                        </label>
+                    </li>
+                    <li>
+                        <label for="grid-size" class="txt-grid-size">
+                            크기: <input type="number" id="grid-size" class="inp-grid-size">px
+                        </label>
+                    </li>
+                </ul>
             </li>
-            <li type="button" class="btn-headmenu file">
+            <li class="btn-headmenu file">
                 <i class="bi bi-file-earmark-text-fill"></i> 추출
             </li>
         </ul>
@@ -122,7 +135,7 @@
     <script src="js/searchFilter.js"></script>
     <script src="js/aside.js"></script>
     <script src="js/attrCustom.js"></script>
-    <script src="js/theme.js"></script>
+    <script src="js/menuOpen.js"></script>
     <script src="js/attrBtn.js"></script>
 </body>
 

@@ -60,6 +60,7 @@ body {
 }
 
 .btn-headmenu {
+    position: relative;
     width: 85px;
     height: 30px;
     background-color: #e0e0e0;
@@ -70,19 +71,24 @@ body {
     overflow: hidden;
     transition: 0.4s;
 }
-.btn-theme-open{
+.btn-menu-open{
     position: absolute;
     width: 85px;
     height: 30px;
     border: none;
     background:none;
-    right: 230px;
+    right: 0;
     cursor: pointer;
 }
 
-.btn-headmenu.palette{
+.btn-headmenu.open{
     padding-bottom: 115px;
     margin-top: 115px;
+}
+
+.btn-headmenu.gird-menu.open{
+    padding-bottom: 80px;
+    margin-top: 80px;
 }
 
 .list-theme-container{
@@ -120,6 +126,40 @@ body {
 
 .btn-theme:hover{
     outline: 1px solid #808080;
+}
+
+.list-grid-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:flex-start;
+    padding: 10px 3px;
+    border-top: 1px solid #808080;
+    
+}
+.list-grid-container li{
+    margin-left: 3px;
+}
+
+.txt-grid-Whether, .txt-grid-size{
+    font-size: 14px;
+}
+
+.inp-grid-size{
+    width: 20px;
+    margin: 0 2px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type="checkbox"]{
+    position: absolute;
+    margin-top: 8px;
 }
 
 .btn-theme-user-custom{
