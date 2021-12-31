@@ -3,28 +3,12 @@ let theme = {
   greenColor: 219,
   blueColor: 196,
 
-  get getRedColor(){
-    return this.redColor;
-  },
-  get getGreenColor(){
-    return this.greenColor;
-  },
-  get getBlueColor(){
-    return this.blueColor;
-  },
-
-  set setRed(value){
-    this.redColor=value;
-  },
-  set setGreen(value){
-    this.greenColor=value;
-  },
-  set setBlue(value){
-    this.blueColor=value;
-  },
+  setColor(red, green, blue){
+    this.redColor = red;
+    this.greenColor = green;
+    this.blueColor = blue;
+  }
 }
-
-const themeSave = [];
 
 
 const tagData = [
