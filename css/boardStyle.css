@@ -372,7 +372,7 @@ main {
 
 .wrap-attr-list {
     overflow: scroll;
-    height: calc(87vh - 76px);
+    height: calc(94vh - 76px);
 }
 
 .wrap-attr-menu{
@@ -450,15 +450,22 @@ main {
 }
 
 .sect-attr-add {
+    display: flex;
+    align-items: center;
+    padding: 2px 0 0 20px;
+    font-size: 14px;
+    font-weight: 500;
     height: 55px;
     border-bottom: 1px solid #eee;
 }
 
 .sect-attr-add.on {
+    padding: 0;
     height: 0;
 }
 
-.sect-attr-add.on .btn-attr-add {
+.sect-attr-add.on .btn-attr-add,
+.sect-attr-add.on .txt-attr-add {
     display: none;
 }
 
