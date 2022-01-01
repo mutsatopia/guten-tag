@@ -55,7 +55,10 @@ const renderTags = function (arr, cls) {
         item.appendChild(text);
         if (isFirst) {
           const rgb = [redColor, greenColor, blueColor]
-            .map(color => color + Math.floor(Math.random()*(70-1+1)) + 1);
+            .map(color => {
+              const value = color + Math.floor(Math.random()*80) - 40;
+              return value - value % 10;
+            });
           arr[index].color = rgb;
           colorMatch[data.tagName] = rgb;
         }
@@ -68,9 +71,7 @@ const renderTags = function (arr, cls) {
     if(isFirst){
       isFirst=false;
     }
-    const bodyColor = [redColor, greenColor, blueColor]
-      .map(color => color + Math.floor(Math.random()*(70-1+1)) + 1);
-    colorMatch.body = bodyColor;
+    colorMatch.body = [redColor, greenColor, blueColor];
     board.paint();
   };
 };
@@ -110,9 +111,9 @@ btnInline.addEventListener("click", renderTags(tagData, "inline"));
 btnBlock.addEventListener("click", renderTags(tagData, "block"));
 btnSemantic.addEventListener("click", renderTags(tagData, "semantic"));
 
-pinkTheme.addEventListener("click", changeTheme(212,154,219));
-greenTheme.addEventListener("click", changeTheme(163,219,140));
-blueTheme.addEventListener("click", changeTheme(90,219,196));
-yellowTheme.addEventListener("click",changeTheme(218,213,139));
+pinkTheme.addEventListener("click", changeTheme(255, 220, 240));
+greenTheme.addEventListener("click", changeTheme(207, 247, 219));
+blueTheme.addEventListener("click", changeTheme(220, 239, 253));
+yellowTheme.addEventListener("click",changeTheme(255, 248, 214));
 
 renderTags(tagData)();

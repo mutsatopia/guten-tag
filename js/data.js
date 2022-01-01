@@ -1,7 +1,7 @@
 let theme = {
-  redColor: 90,
-  greenColor: 219,
-  blueColor: 196,
+  redColor: 220,
+  greenColor: 239,
+  blueColor: 253,
 
   setColor(red, green, blue){
     this.redColor = red;
