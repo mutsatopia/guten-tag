@@ -19,6 +19,7 @@ btnClose.addEventListener("click", toggleModalOn);
 for (i = 0; i < radioIndent.length; i++) {
   radioIndent[i].addEventListener("click", function() {
     codePreview.value = getHTML();
+    btnCopy.innerHTML = "클립보드에 복사";
   });
 }
 
