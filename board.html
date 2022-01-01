@@ -24,6 +24,22 @@
 
         <input type="text" id="title" placeholder="✎ 문서 제목을 입력하세요" class="input-title" />
 
+        <section class="modal">
+            <article class="modal-export">
+                <div class="wrap-cont-modal">
+                    <small>구텐Tag</small>
+                    <strong>코드 추출하기</strong>
+                    <div class="wrap-preview"><i class="bi bi-record-circle-fill"></i><em>미리보기</em></div>
+                    <textarea class="preview-code"></textarea>
+                    <button type="button" class="btn-copy">클립보드에 복사</button>
+                    <button type="button" class="btn-close">
+                        <img src="resource/x-lg.svg" alt="코드 추출창 닫기">
+                    </button>
+                </div>
+            </article>
+            <div class="modal-dimed"></div>
+        </section>
+
         <ul class="wrap-btn-menu">
             <li id="btn-palette" class="btn-headmenu">
                 <i class="bi bi-palette-fill"></i> 테마
@@ -137,6 +153,7 @@
     <script src="js/attrCustom.js"></script>
     <script src="js/menuOpen.js"></script>
     <script src="js/attrBtn.js"></script>
+    <script src="js/modal.js"></script>
 </body>
 
 </html>
