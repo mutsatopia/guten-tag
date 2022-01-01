@@ -1,7 +1,8 @@
-const tagBtn = document.querySelector(".btn-tag-list");
-const attrBtn = document.querySelector(".btn-attribute");
 const tagList = document.querySelector(".side-tag-list");
 const attrList = document.querySelector(".side-attr-list");
+const sideBtn = document.querySelector('.side-btn-list')
+
+
 
 tagBtn.addEventListener("click",()=>{
     tagList.classList.add("side-list-on");
