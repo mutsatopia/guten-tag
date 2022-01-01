@@ -272,6 +272,7 @@ input[type="checkbox"]{
     resize: none;
     color: #333;
     transition: all 0.2s ease;
+    white-space: pre-wrap;
 }
 
 .preview-code::-webkit-scrollbar, .wrap-attr-list::-webkit-scrollbar, .board::-webkit-scrollbar {
