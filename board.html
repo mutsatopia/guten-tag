@@ -33,13 +33,13 @@
                         <i class="bi bi-record-circle-fill"></i><em>미리보기</em>
                         <div class="input-indent">
                             <em><i class="bi bi-text-indent-left"></i>들여쓰기</em>
-                            <input type="radio" id="2칸" name="indent" value="2칸" checked>
-                            <label for="2칸">2칸</label>
-                            <input type="radio" id="4칸" name="indent" value="4칸">
-                            <label for="4칸">4칸</label>
+                            <input type="radio" id="indent-two" name="indent" value="2칸" checked>
+                            <label for="indent-two">2칸</label>
+                            <input type="radio" id="indent-four" name="indent" value="4칸">
+                            <label for="indent-four">4칸</label>
                         </div>
                     </div>
-                    <textarea class="preview-code"></textarea>
+                    <textarea spellcheck="false" class="preview-code"></textarea>
                     <button type="button" class="btn-copy">클립보드에 복사</button>
                     <button type="button" class="btn-close">
                         <img src="resource/x-lg.svg" alt="코드 추출창 닫기">
@@ -59,7 +59,8 @@
                     <li><button type="button" class="btn-theme theme-three"></button></li>
                     <li><button type="button" class="btn-theme theme-four"></button></li>
                 </ul>
-                <label for="color-tag" class="txt-color">색상 선택<input type="color" value="#A3EEFF" id="color-tag" class="inp-color"></label>
+                <label for="color-tag" class="txt-color">색상 선택<input type="color" value="#A3EEFF" id="color-tag"
+                        class="inp-color"></label>
             </li>
             <li id="btn-grid" class="btn-headmenu gird-menu">
                 <i class="bi bi-grid-3x3"></i> 격자

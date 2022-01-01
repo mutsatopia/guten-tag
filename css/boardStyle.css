@@ -308,6 +308,7 @@ input[type="color"]{
 .input-indent label {
     margin-top: 3px;
     margin-right: 2px;
+    cursor: pointer;
 }
 
 .preview-code {
@@ -348,12 +349,19 @@ input[type="color"]{
 .btn-copy {
     background: #409cdf;
     padding: 15px 0;
-    border: none;
+    border: 1px solid transparent;
     border-radius: 5px;
     color: #fff;
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.btn-copy:active {
+    border: 1px solid #409cdf;
+    background: #fff;
+    color: #409cdf;
 }
 
 .btn-close {
@@ -487,7 +495,7 @@ main {
     flex-direction: column;
     gap: 20px;
     height: calc(100vh - 245px);
-    padding: 10px 2px 30px 2px;
+    padding: 10px 3px 30px 3px;
     overflow: scroll;
 }
 
@@ -499,6 +507,7 @@ main {
     box-shadow: 0px 3px 3px rgba(0,0,0,.2);
     text-align: center;
     box-sizing: border-box;
+    transition: .1s;
 }
 /* aside 끝 */
 
@@ -528,10 +537,14 @@ main {
     top: 0;
     left: 0;
     border: solid black;
-    background-color: rgb(226, 247, 255);
     box-sizing: border-box;
     user-select: none;
     transition: all .1s;
+}
+
+.tag-white-border {
+    border: solid white;
+    color: white;
 }
 
 .board-grid {
@@ -552,9 +565,30 @@ main {
 .selected-tag {
     border-color: #ff5101;
 }
+@keyframes outlineColor {
+    0%{
+        outline-color: #FAB6B1;
+    }
+    20%{
+        outline-color: #FAC395;
+    }
+    40%{
+        outline-color: #FAE58F;
+    }
+    60%{
+        outline-color: #A3FA97;
+    }
+    80%{
+        outline-color: #ABF8FA;
+    }
+    100%{
+        outline-color: #FAB6B1;
+    }
+}
 
 .click-tag {
-    outline: 2px solid #aaa;
+    outline: 3px solid #FA8987;
+    animation: outlineColor 1.8s infinite;
 }
 
 .side-list-on{
@@ -616,6 +650,10 @@ main {
 
 .wrap-attr-menu.on {
     display: flex;
+}
+
+.wrap-tag-white {
+    color: white;
 }
 
 .wrap-tag-name {

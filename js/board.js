@@ -4,6 +4,7 @@ const board = {
   ready: null, // 태그 선택 창에서 선택한 요소
   selected: null,
   prevInfo: new Map(),
+  isWhiteBorder: false,
 
   // board 초기화
   // 1. body 생성 및 초기화
@@ -363,6 +364,12 @@ const board = {
   showTagBar() {
     tagList.classList.add("side-list-on");
     attrList.classList.remove("side-list-on");
+  },
+
+  paint() {
+    this.forEach((tag) => {
+      tag.paint();
+    });
   }
 };
 
@@ -451,7 +458,6 @@ const keydownHandler = ({ key }) => {
 
 const changeBtnColor = () => {
   attrBtn.style.display = "block";
-
   attrBtn.classList.remove("btn-checked");
   tagBtn.classList.add("btn-checked");
 };
