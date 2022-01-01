@@ -10,6 +10,7 @@ let theme = {
   }
 }
 
+const colorMatch = {};
 
 const tagData = [
   {

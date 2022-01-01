@@ -45,6 +45,7 @@ const tagClickHandler = (data) => {
 const renderTags = function (arr, cls) {
   return function () {
     wrapTag.innerHTML = "";
+    const { redColor, greenColor, blueColor } = theme;
     const fragment = document.createDocumentFragment();
     arr.forEach((data,index) => {
       const { tagName, keyword } = data;
@@ -53,12 +54,12 @@ const renderTags = function (arr, cls) {
         let text = document.createTextNode(tagName);
         item.appendChild(text);
         if (isFirst) {
-          let { redColor, greenColor, blueColor } = theme;
           const rgb = [redColor, greenColor, blueColor]
             .map(color => color + Math.floor(Math.random()*(70-1+1)) + 1);
           arr[index].color = rgb;
+          colorMatch[data.tagName] = rgb;
         }
-        item.style.backgroundColor = `rgb(${tagData[index].color.join(',')})`;
+        item.style.backgroundColor = `rgb(${arr[index].color.join(',')})`;
         item.addEventListener("click", tagClickHandler(data))
         fragment.appendChild(item);
       }
@@ -67,20 +68,24 @@ const renderTags = function (arr, cls) {
     if(isFirst){
       isFirst=false;
     }
+    const bodyColor = [redColor, greenColor, blueColor]
+      .map(color => color + Math.floor(Math.random()*(70-1+1)) + 1);
+    colorMatch.body = bodyColor;
+    board.paint();
   };
 };
 
-const changeTheme = function(r,g,b){
-  return function(){
+const changeTheme = function(r, g, b){
+  return function() {
     theme.setColor(r, g, b);
-    isFirst=true;
-    btnFilters.forEach((check)=>{
-      if(check.id!=="btn-all"){
+    isFirst = true;
+    btnFilters.forEach((check) => {
+      if (check.id !== "btn-all") {
         check.classList.remove("selected");
-      }else{
+      } else {
         check.classList.add("selected");
       }
-    })
+    });
     renderTags(tagData)();
   }
 } 
@@ -89,7 +94,7 @@ customTheme.addEventListener("input", watchColor, false);
 
 function watchColor(event){
   let colorCode = event.target.value;
-  console.log(colorCode);
+  //console.log(colorCode);
   const r = parseInt(colorCode.substr(1,2),16);
   const g = parseInt(colorCode.substr(3,2),16);
   const b = parseInt(colorCode.substr(5,2),16);

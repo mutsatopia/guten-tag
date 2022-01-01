@@ -16,6 +16,7 @@ class Tag {
     this.setFontSize();
     this.elem.textContent = this.tagName;
     this.elem.classList.add("tag");
+    if (this.tagName !== "body") this.paint();
     this.hide();
   }
 
@@ -91,6 +92,11 @@ class Tag {
         this.elem.style.opacity = 1;
         this.elem.classList.add('selected-tag');
     }
+  }
+
+  paint() {
+    const color = colorMatch[this.tagName];
+    this.elem.style.backgroundColor = `rgb(${color.join(", ")})`;
   }
 
   restoreSize() {

@@ -519,7 +519,6 @@ main {
     top: 0;
     left: 0;
     border: solid black;
-    background-color: rgb(226, 247, 255);
     box-sizing: border-box;
     user-select: none;
     transition: all .1s;

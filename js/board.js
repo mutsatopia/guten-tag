@@ -356,6 +356,12 @@ const board = {
   showTagBar() {
     tagList.classList.add("side-list-on");
     attrList.classList.remove("side-list-on");
+  },
+
+  paint() {
+    this.forEach((tag) => {
+      tag.paint();
+    });
   }
 };
 
@@ -441,8 +447,6 @@ const keydownHandler = ({ key }) => {
       board.clearReady();
   }
 };
-
-
 
 document.addEventListener("keydown", keydownHandler);
 
