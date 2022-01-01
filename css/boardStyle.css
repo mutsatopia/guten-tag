@@ -308,6 +308,7 @@ input[type="color"]{
 .input-indent label {
     margin-top: 3px;
     margin-right: 2px;
+    cursor: pointer;
 }
 
 .preview-code {
@@ -348,12 +349,19 @@ input[type="color"]{
 .btn-copy {
     background: #409cdf;
     padding: 15px 0;
-    border: none;
+    border: 1px solid transparent;
     border-radius: 5px;
     color: #fff;
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.btn-copy:active {
+    border: 1px solid #409cdf;
+    background: #fff;
+    color: #409cdf;
 }
 
 .btn-close {
