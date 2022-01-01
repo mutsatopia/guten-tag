@@ -6,6 +6,7 @@ class Tag {
     this.state = state ?? "none";
     this.parent = parent ?? null;
     this.children = children ?? [];
+    this.attr = this.attr ?? [];
     this.initElem();
   }
 

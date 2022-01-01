@@ -185,14 +185,17 @@ const board = {
       this.selected?.setState("located");
       this.selected?.elem?.classList?.remove('selected-tag');
       this.selected = null;
+      this.showTagBar();
     } else if (this.selected) {
       this.selected.setState("located");
       this.selected.elem.classList.remove('selected-tag');
       this.selected = nextSelected;
       this.selected?.setState("selected");
+      this.showAttrBar();
     } else {
       this.selected = nextSelected;
       this.selected?.setState("selected");
+      this.showAttrBar();
     }
   },
 
@@ -340,6 +343,19 @@ const board = {
     }
     this.forEach((tag) => tag.setState("located"));
     this.selected.setState("selected");
+  },
+
+  showAttrBar() {
+    attrList.classList.add("side-list-on");
+    tagList.classList.remove("side-list-on");
+    const tagTitle = document.querySelector(".text-select-tag-name");
+    tagTitle.textContent = this.selected.tagName;
+    attrRender(this.selected.attr);
+  },
+
+  showTagBar() {
+    tagList.classList.add("side-list-on");
+    attrList.classList.remove("side-list-on");
   }
 };
 
@@ -356,16 +372,6 @@ const clickHandler = (event) => {
     board.select(event);
   }
 };
-
-const attrClickHandler = (event) => {
-  clickHandler(event);
-  const parent = board.searchByLocation(event);
-  attrList.classList.add("side-list-on");
-  tagList.classList.remove("side-list-on");
-  const tagTitle = document.querySelector(".text-select-tag-name");
-  tagTitle.textContent = parent.tagName;
-};
-
 
 // 마우스가 보드 밖에서 보드 안으로 들어갈 때 이벤트 핸들러
 const mouseoverHandler = (event) => {
@@ -421,7 +427,6 @@ const mouseupHandler = (event) => {
 };
 
 board.elem.addEventListener("click", clickHandler);
-board.elem.addEventListener("dblclick", attrClickHandler);
 board.elem.addEventListener("mouseover", mouseoverHandler);
 board.elem.addEventListener("mousemove", mousemoveHandler);
 board.elem.addEventListener("mouseout", mouseoutHandler);
