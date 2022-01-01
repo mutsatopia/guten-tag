@@ -17,7 +17,14 @@ openMenuBtn.forEach((target)=>{
 
 document.addEventListener("click", (event) => {
   [palette, gridPlace].forEach(btn => {
-    if (event.target !== btn && ![...btn.childNodes].includes(event.target)) {
+    const stack = [btn];
+    const nodes = [];
+    while (stack.length) {
+      const node = stack.pop();
+      nodes.push(node);
+      stack.push(...node.childNodes);
+    }
+    if (!nodes.includes(event.target)) {
       btn.classList.remove("open");
     }
   });
