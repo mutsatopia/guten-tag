@@ -101,7 +101,7 @@ body {
     column-gap: 10px;
     row-gap: 5px;
     padding: 5px 0 0 0;
-    border-bottom: 1px solid #808080;
+    border-bottom: 1px solid #c4c4c4;
 }
 
 .btn-theme{
@@ -136,8 +136,6 @@ body {
     justify-content: center;
     align-items:flex-start;
     padding: 10px 3px;
-    border-top: 1px solid #808080;
-    
 }
 .list-grid-container li{
     margin-left: 3px;

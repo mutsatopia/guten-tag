@@ -442,6 +442,8 @@ const keydownHandler = ({ key }) => {
   }
 };
 
+
+
 document.addEventListener("keydown", keydownHandler);
 
 board.init(1420, 800);

@@ -62,3 +62,9 @@ const grid = {
     this.elem.style.top = `${this.y}px`;
   }
 };
+
+const checked = document.querySelector('#grid-check')
+checked.addEventListener("click", ()=> {
+  const boardLine = document.querySelector(".board-grid")
+  checked.checked ? boardLine.style.display = "" : boardLine.style.display = "none"
+})
