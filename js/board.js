@@ -144,14 +144,16 @@ const board = {
   // Tag 객체에 해당되는 DOM 요소 삭제
   // Tag 객체의 부모가 children 배열에서 참조하고 있는 값을 삭제하여 메모리에서 제거
   delete(tag) {
-    const { elem } = tag;
-    this.elem.removeChild(elem);
+    if (tag.tagName === "body") return;
+    this.forEach((curTag) => {
+      this.elem.removeChild(curTag.elem);
+    }, tag);
     this.deleteFromTree(tag);
   },
 
   deleteFromTree(tag) {
-    const { children } = tag.parent ?? {};
-    if (children) children.splice(children.indexOf(tag), 1);
+    const { parent } = tag;
+    if (parent) parent.remove(tag);
   },
 
   // ready 상태의 Tag 객체를 located 상태로 변경
@@ -159,16 +161,14 @@ const board = {
     tag.setState("located");
     if (type === "ready") {
       const parent = this.searchByLocation(event);
-      parent.children.push(tag);
-      tag.parent = parent;
+      parent.push(tag);
       this.clearReady(false, false);
     }
     // 태그의 depth 순서 갱신 (selected 태그가 더 앞으로 나오도록 함)
     if (type === "selected") {
       if (tag === this.selected) {
         const parent = this.searchByLocation(event);
-        parent.children.push(tag);
-        tag.parent = parent;
+        parent.push(tag);
       }
       this.elem.removeChild(tag.elem);
       this.elem.appendChild(tag.elem);
@@ -176,17 +176,22 @@ const board = {
     this.forEach(tag => {
       if (tag.state === "modified") {
         tag.setState("located");
+        tag.rearrangeChildren();
       }
     });
+  },
+
+  clearSelected() {
+    this.selected?.setState("located");
+    this.selected?.elem?.classList?.remove('selected-tag');
+    this.selected = null;
   },
 
   select(event) {
     const nextSelected = this.searchByLocation(event);
     
     if (nextSelected === this.selected || !nextSelected) {
-      this.selected?.setState("located");
-      this.selected?.elem?.classList?.remove("selected-tag");
-      this.selected = null;
+      this.clearSelected();
       this.showTagBar();
 
       attrBtn.style.display = "none";
@@ -236,11 +241,13 @@ const board = {
             tag.setState("located");
             tag.restoreSize();
             tag.restorePos();
+            tag.rearrangeChildren();
           } else {
             const tagArr = this.searchAllTagsByLocation(event);
             if (tagArr) {
               if (!tagArr.includes(tag)) {
                 tag.restoreSize();
+                tag.rearrangeChildren();
               }
             }
           }
@@ -252,6 +259,7 @@ const board = {
           tag.setState("located");
           tag.restoreSize();
           tag.restorePos();
+          tag.rearrangeChildren();
         }
       });
     }
@@ -346,7 +354,7 @@ const board = {
         tag.setSize(width, height);
         tag.setPos(x, y);
       }, this.selected);
-      parent.children.push(this.selected);
+      parent.push(this.selected);
       this.restore();
     }
     this.forEach((tag) => tag.setState("located"));
@@ -423,9 +431,15 @@ const mouseoutHandler = () => {
 // 마우스 우클릭 이벤트 핸들러
 const mousedownHandler = (event) => {
   const { which, button } = event;
-  const { selected } = board;
+  const { ready, selected } = board;
   if (which === 3 || button === 2) {
-    board.clearReady();
+    const curTag = board.searchByLocation(event);
+    if (ready) {
+      board.clearReady();
+    } else if (selected && curTag === selected) {
+      board.clearSelected();
+      board.delete(selected);
+    }
   } else {
     if (selected) {
       board.dragStart(event);
@@ -453,6 +467,12 @@ const keydownHandler = ({ key }) => {
   switch (key) {
     case "Escape":
       board.clearReady();
+      break;
+    case "Delete":
+      const { selected } = board;
+      if (!selected) return;
+      board.clearSelected();
+      board.delete(selected);
   }
 };
 

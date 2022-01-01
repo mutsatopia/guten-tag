@@ -547,6 +547,12 @@ main {
     color: white;
 }
 
+.tag-text-loc {
+    justify-content: normal;
+    align-items: normal;
+    padding-left: 3px;
+}
+
 .board-grid {
     position: absolute;
     z-index: 9;

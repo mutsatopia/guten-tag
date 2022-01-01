@@ -22,8 +22,15 @@ class Tag {
 
   // DOM 요소의 글자 크기를 크기에 비례해서 지정
   setFontSize() {
-    const fontSize = (this.height ?? 100) / 4;
-    this.elem.style.fontSize = `${fontSize > 40 ? 40 : fontSize}px`;
+    const { size } = grid;
+    if (this.children.length) {
+      this.elem.classList.add("tag-text-loc");
+      this.elem.style.fontSize = `${size * 0.7}px`;
+    } else {
+      this.elem.classList.remove("tag-text-loc");
+      const fontSize = (this.height ?? 100) / 4;
+      this.elem.style.fontSize = `${fontSize > 40 ? 40 : fontSize}px`;
+    }
   }
 
   // DOM 요소의 width, height 스타일 및 글자 크기 설정
@@ -159,5 +166,23 @@ class Tag {
         }
       });
     }
+  }
+
+  push(tag) {
+    this.children.push(tag);
+    this.setFontSize();
+    tag.parent = this;
+  }
+
+  remove(tag) {
+    this.children.splice(this.children.indexOf(tag), 1);
+    this.setFontSize();
+  }
+
+  rearrangeChildren() {
+    this.children.sort((a, b) => {
+      if (a.y === b.y) return a.x - b.x;
+      return a.y - b.y;
+    });
   }
 }
