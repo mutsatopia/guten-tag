@@ -18,7 +18,7 @@ const board = {
     [ width, height ] = [ trim(width, size), trim(height, size) ];
     this.body.setSize(width + 1, height + 1);
     this.body.show();
-    grid.paintGrid();
+    grid.paint();
     this.body.setPos((this.width - width) / 2, (this.height - height) / 2);
   },
 

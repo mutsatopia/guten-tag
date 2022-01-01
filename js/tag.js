@@ -35,8 +35,10 @@ class Tag {
 
   // DOM 요소의 width, height 스타일 및 글자 크기 설정
   setSize(width, height) {
+    const { size } = grid;
     this.width = width ?? this.width;
     this.height = height ?? this.height;
+    if (this.height <= size) this.height = size + 1;
     setElemSize(this.elem, this.width, this.height);
     this.setFontSize();
     if (this.state === "modified") {
