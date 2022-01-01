@@ -144,8 +144,10 @@ const board = {
   // Tag 객체에 해당되는 DOM 요소 삭제
   // Tag 객체의 부모가 children 배열에서 참조하고 있는 값을 삭제하여 메모리에서 제거
   delete(tag) {
-    const { elem } = tag;
-    this.elem.removeChild(elem);
+    if (tag.tagName === "body") return;
+    this.forEach((curTag) => {
+      this.elem.removeChild(curTag.elem);
+    }, tag);
     this.deleteFromTree(tag);
   },
 
@@ -422,9 +424,15 @@ const mouseoutHandler = () => {
 // 마우스 우클릭 이벤트 핸들러
 const mousedownHandler = (event) => {
   const { which, button } = event;
-  const { selected } = board;
+  const { ready, selected } = board;
   if (which === 3 || button === 2) {
-    board.clearReady();
+    const curTag = board.searchByLocation(event);
+    if (ready) {
+      board.clearReady();
+    } else if (selected && curTag === selected) {
+      board.clearSelected();
+      board.delete(selected);
+    }
   } else {
     if (selected) {
       board.dragStart(event);
@@ -452,6 +460,12 @@ const keydownHandler = ({ key }) => {
   switch (key) {
     case "Escape":
       board.clearReady();
+      break;
+    case "Delete":
+      const { selected } = board;
+      if (!selected) return;
+      board.clearSelected();
+      board.delete(selected);
   }
 };
 
