@@ -117,6 +117,18 @@ const tagData = [
     keyword: ["block"],
   },
   {
+    tagName: "hgroup",
+    keyword: ["block"],
+  },
+  {
+    tagName: "strong",
+    keyword: ["inline"],
+  },
+  {
+    tagName: "em",
+    keyword: ["inline"],
+  },
+  {
     tagName: "fieldset",
     keyword: ["block"],
   },
@@ -130,38 +142,34 @@ const tagData = [
   },
   {
     tagName: "input",
-    keyword: ["block"],
+    keyword: ["inline"],
   },
   {
     tagName: "button",
-    keyword: ["block"],
+    keyword: ["inline"],
   },
   {
     tagName: "select",
-    keyword: ["block"],
-  },
-  {
-    tagName: "strong",
-    keyword: ["inline"],
-  },
-  {
-    tagName: "b",
-    keyword: ["inline"],
-  },
-  {
-    tagName: "i",
-    keyword: ["inline"],
-  },
-  {
-    tagName: "em",
-    keyword: ["inline"],
-  },
-  {
-    tagName: "u",
     keyword: ["inline"],
   },
   {
     tagName: "textarea",
+    keyword: ["inline"],
+  },
+  {
+    tagName: "q",
+    keyword: ["inline"],
+  },
+  {
+    tagName: "blockquote",
+    keyword: ["block"],
+  },
+  {
+    tagName: "cite",
+    keyword: ["inline"],
+  },
+  {
+    tagName: "hr",
     keyword: ["block"],
   },
   {
@@ -185,8 +193,68 @@ const tagData = [
     keyword: ["block"],
   },
   {
+    tagName: "video",
+    keyword: ["inline"],
+  },
+  {
+    tagName: "audio",
+    keyword: ["inline"],
+  },
+  {
     tagName: "iframe",
+    keyword: ["inline"],
+  },
+  {
+    tagName: "table",
     keyword: ["block"],
+  },
+  {
+    tagName: "caption",
+    keyword: ["block"],
+  },
+  {
+    tagName: "colgroup",
+    keyword: ["block"],
+  },
+  {
+    tagName: "col",
+    keyword: ["block"],
+  },
+  {
+    tagName: "thead",
+    keyword: ["block"],
+  },
+  {
+    tagName: "tbody",
+    keyword: ["block"],
+  },
+  {
+    tagName: "tfoot",
+    keyword: ["block"],
+  },
+  {
+    tagName: "tr",
+    keyword: ["block"],
+  },
+  {
+    tagName: "th",
+    keyword: ["block"],
+  },
+  {
+    tagName: "td",
+    keyword: ["block"],
+  },
+  {
+    tagName: "b",
+    keyword: ["inline"],
+  },
+  {
+    tagName: "i",
+    keyword: ["inline"],
+  },
+  {
+    tagName: "u",
+    keyword: ["inline"],
   },
   {
     tagName: "sup",
@@ -195,6 +263,10 @@ const tagData = [
   {
     tagName: "abbr",
     keyword: ["inline"],
+  },
+  {
+    tagName: "pre",
+    keyword: ["block"],
   },
   {
     tagName: "code",
