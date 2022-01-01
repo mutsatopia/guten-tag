@@ -36,7 +36,10 @@ const grid = {
   // 1. 보드의 크기가 size로 딱 나눠 떨어지지 않으므로 양 옆에 줄 간격(margin) 설정
   // 2. size와 margin을 기준으로 일정 간격으로 가로 세로 선 생성
   // 3. 격자를 담고 있는 DOM 요소를 보드 DOM 요소에 추가하여 화면에 표시
-  paintGrid() {
+  paint() {
+    while (this.elem.hasChildNodes()) {
+      this.elem.removeChild(this.elem.firstChild);
+    }
     const { width, height } = this.board;
     this.marginX = (width % this.size) / 2;
     this.marginY = (height % this.size) / 2;
@@ -60,11 +63,43 @@ const grid = {
     this.y = y ?? this.y;
     this.elem.style.left = `${this.x}px`;
     this.elem.style.top = `${this.y}px`;
+  },
+
+  setSize(size) {
+    const { body, width, height } = this.board;
+    this.size = size;
+    this.paint();
+    this.board.forEach((tag) => {
+      tag.setSize(trim(tag.width, size) + 1, trim(tag.height, size) + 1);
+      tag.setPos(tag.x, tag.y);
+    });
+    body.setPos((width - body.width) / 2, null);
+    this.board.forEach((tag) => {
+      tag.setState("located");
+    });
   }
 };
 
-const checked = document.querySelector('#grid-check')
-checked.addEventListener("click", ()=> {
-  const boardLine = document.querySelector(".board-grid")
-  checked.checked ? boardLine.style.display = "" : boardLine.style.display = "none"
-})
+const checked = document.querySelector('#grid-check');
+const sizeInput = document.querySelector('#grid-size');
+sizeInput.value = grid.size;
+
+checked.addEventListener("click", () => {
+  const boardLine = document.querySelector(".board-grid");
+  boardLine.style.display = checked.checked ?  "" : "none";
+});
+
+sizeInput.addEventListener("focusout", () => {
+  let size = +sizeInput.value;
+  if (Number.isNaN(size)) {
+    size = 32;
+    sizeInput.value = 32;
+  } else if (size <= 9) {
+    size = 10;
+    sizeInput.value = 10;
+  } else if (size > 100) {
+    size = 100;
+    sizeInput.value = 100;
+  }
+  grid.setSize(size);
+});
