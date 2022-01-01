@@ -29,7 +29,16 @@
                 <div class="wrap-cont-modal">
                     <small>구텐Tag</small>
                     <strong>코드 추출하기</strong>
-                    <div class="wrap-preview"><i class="bi bi-record-circle-fill"></i><em>미리보기</em></div>
+                    <div class="wrap-preview">
+                        <i class="bi bi-record-circle-fill"></i><em>미리보기</em>
+                        <div class="input-indent">
+                            <em><i class="bi bi-text-indent-left"></i>들여쓰기</em>
+                            <input type="radio" id="2칸" name="indent" value="2칸" checked>
+                            <label for="2칸">2칸</label>
+                            <input type="radio" id="4칸" name="indent" value="4칸">
+                            <label for="4칸">4칸</label>
+                        </div>
+                    </div>
                     <textarea class="preview-code"></textarea>
                     <button type="button" class="btn-copy">클립보드에 복사</button>
                     <button type="button" class="btn-close">

@@ -271,20 +271,50 @@ input[type="color"]{
     line-height: 1.5em;
 }
 
+.wrap-preview {
+    display: flex;
+    align-items: center;
+}
+
 .bi-record-circle-fill {
     margin-right: 10px;
     color: #409cdf;
     font-size: 15px;
 }
 
-.wrap-cont-modal em {
+.wrap-preview em {
+    margin: 2px auto 0 0;
     font-size: 15px;
+    font-weight: 550;
+}
+
+.input-indent em {
+    margin: 5px 5px 0 0;
+    font-size: 13px;
     font-weight: 500;
+}
+
+.input-indent {
+    display: flex;
+    align-items: center;
+    margin: 0 5px -20px 0;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.bi-text-indent-left {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.input-indent label {
+    margin-top: 3px;
+    margin-right: 2px;
 }
 
 .preview-code {
     display: block;
-    margin: 10px 0 30px 10px;
+    margin: 20px 0 20px 10px;
     padding: 10px 15px;
     height: 400px;
     outline: none;
