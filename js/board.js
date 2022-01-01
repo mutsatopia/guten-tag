@@ -150,8 +150,8 @@ const board = {
   },
 
   deleteFromTree(tag) {
-    const { children } = tag.parent ?? {};
-    if (children) children.splice(children.indexOf(tag), 1);
+    const { parent } = tag;
+    if (parent) parent.remove(tag);
   },
 
   // ready 상태의 Tag 객체를 located 상태로 변경
@@ -159,16 +159,14 @@ const board = {
     tag.setState("located");
     if (type === "ready") {
       const parent = this.searchByLocation(event);
-      parent.children.push(tag);
-      tag.parent = parent;
+      parent.push(tag);
       this.clearReady(false, false);
     }
     // 태그의 depth 순서 갱신 (selected 태그가 더 앞으로 나오도록 함)
     if (type === "selected") {
       if (tag === this.selected) {
         const parent = this.searchByLocation(event);
-        parent.children.push(tag);
-        tag.parent = parent;
+        parent.push(tag);
       }
       this.elem.removeChild(tag.elem);
       this.elem.appendChild(tag.elem);
@@ -339,7 +337,7 @@ const board = {
         tag.setSize(width, height);
         tag.setPos(x, y);
       }, this.selected);
-      parent.children.push(this.selected);
+      parent.push(this.selected);
       this.restore();
     }
     this.forEach((tag) => tag.setState("located"));
