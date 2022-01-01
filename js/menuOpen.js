@@ -15,24 +15,10 @@ openMenuBtn.forEach((target)=>{
   });
 });
 
-document.addEventListener("click",(event)=>{
-    
-  console.log(event.target.classList.value);
-  if(event.target.classList.value!=="btn-menu-open" 
-  && event.target.classList.value!=="btn-theme theme-one"
-  && event.target.classList.value!=="btn-theme theme-two"
-  && event.target.classList.value!=="btn-theme theme-three"
-  && event.target.classList.value!=="btn-theme theme-four"
-  && event.target.classList.value!=="btn-theme-user-custom"
-  && event.target.classList.value!=="txt-grid-Whether"
-  && event.target.classList.value!=="inp-grid-check"
-  && event.target.classList.value!=="txt-grid-size"
-  && event.target.classList.value!=="inp-grid-size"
-  && event.target.classList.value!=="list-theme-container"
-  && event.target.classList.value!=="list-grid-container"
-  && event.target.classList.value!=="txt-color"
-  && event.target.classList.value!=="inp-color"){
-    gridPlace.classList.remove("open");
-    palette.classList.remove("open");
-  }
+document.addEventListener("click", (event) => {
+  [palette, gridPlace].forEach(btn => {
+    if (event.target !== btn && ![...btn.childNodes].includes(event.target)) {
+      btn.classList.remove("open");
+    }
+  });
 });
