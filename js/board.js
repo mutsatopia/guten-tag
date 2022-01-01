@@ -178,12 +178,16 @@ const board = {
     });
   },
 
+  clearSelected() {
+    this.selected?.setState("located");
+    this.selected?.elem?.classList?.remove('selected-tag');
+    this.selected = null;
+  },
+
   select(event) {
     const nextSelected = this.searchByLocation(event);
     if (nextSelected === this.selected || !nextSelected) {
-      this.selected?.setState("located");
-      this.selected?.elem?.classList?.remove('selected-tag');
-      this.selected = null;
+      this.clearSelected();
       this.showTagBar();
     } else if (this.selected) {
       this.selected.setState("located");

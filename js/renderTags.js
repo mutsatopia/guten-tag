@@ -34,6 +34,7 @@ const tagClickHandler = (data) => {
       el.classList.remove("click-tag");
     });
     target.classList.toggle("click-tag");
+    if (board.selected) board.clearSelected();
     if (target.textContent === board.ready?.tagName) {
       board.clearReady();
     } else {
@@ -47,7 +48,6 @@ const renderTags = function (arr, cls) {
     wrapTag.innerHTML = "";
     const { redColor, greenColor, blueColor } = theme;
     const basic = [redColor, greenColor, blueColor];
-    const chosen = [[...basic]];
     const fragment = document.createDocumentFragment();
     arr.forEach((data,index) => {
       const { tagName, keyword } = data;
