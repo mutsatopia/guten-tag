@@ -33,7 +33,8 @@ const getHTML = (start = board.body) => {
   while (stack.length) {
     tag = stack.pop();
     if (tag instanceof Tag) {
-      output.push(`${"  ".repeat(indentCount)}<${tag.tagName}>`);
+      const attributes = tag.attr.reduce((acc, { title, attr }) => acc + ` ${title}="${attr}"`, "");
+      output.push(`${"  ".repeat(indentCount)}<${tag.tagName}${attributes}>`);
       const children = tag.children.concat(`</${tag.tagName}>`).reverse();
       stack.push(...children);
       indentCount++;
