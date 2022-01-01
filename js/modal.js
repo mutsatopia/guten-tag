@@ -13,6 +13,9 @@ const toggleModalOn = () => {
 };
 
 btnExportModal.addEventListener("click", toggleModalOn);
+btnExportModal.addEventListener("click", ()=>{
+  board.clearReady();
+});
 dimed.addEventListener("click", toggleModalOn);
 btnClose.addEventListener("click", toggleModalOn);
 

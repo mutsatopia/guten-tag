@@ -5,6 +5,7 @@ const openMenuBtn = document.querySelectorAll(".btn-menu-open");
 
 openMenuBtn.forEach((target)=>{
   target.addEventListener("click",()=>{
+    board.clearReady();
     if(target.id==="btn-open-theme"){
       palette.classList.toggle("open");
       gridPlace.classList.remove("open");
