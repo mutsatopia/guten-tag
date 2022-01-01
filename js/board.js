@@ -149,6 +149,14 @@ const board = {
       this.elem.removeChild(curTag.elem);
     }, tag);
     this.deleteFromTree(tag);
+
+    tagList.classList.add("side-list-on");
+    attrList.classList.remove("side-list-on")
+
+    tagBtn.classList.remove("btn-checked");
+    attrBtn.classList.add("btn-checked");
+    
+    attrBtn.style.display = "none";
   },
 
   deleteFromTree(tag) {
@@ -484,6 +492,7 @@ const changeBtnColor = () => {
 
 const tagBtn = document.querySelector(".btn-tag-list");
 const attrBtn = document.querySelector(".btn-attribute");
+
 
 tagBtn.addEventListener("click", ()=>{
   if(tagBtn.classList.contains("btn-checked")){
