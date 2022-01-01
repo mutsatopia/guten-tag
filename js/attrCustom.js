@@ -8,10 +8,14 @@ attrInput.addEventListener("focusout", addAttr);
 
 const attrArr = [
   {
-    id:1, title:"href", attr:"www.hihi.com"
+    id:1,
+    title:"href",
+    attr:"www.hihi.com"
   },
   {
-    id:2, title:"type", attr:"button"
+    id:2,
+    title:"type",
+    attr:"button"
   }
 ];
 
@@ -20,7 +24,7 @@ function addAttr() {
   const attr = document.querySelector(".input-attr-user-custom");
 
   if(elName.value.length > 0 & attr.value.length > 0) {
-    if(attrArr.length === 0 ){
+    if(attrArr.length === 0){
       attrArr.push({
         id: 1,
         title: elName.value,
@@ -32,8 +36,8 @@ function addAttr() {
         title: elName.value,
         attr: attr.value
       });
-    }
-  }
+    };
+  };
 
   while(attrContainer.hasChildNodes()){
     attrContainer.removeChild(attrContainer.firstChild);
@@ -56,21 +60,23 @@ function attrRender(arr) {
   arr.forEach((el) => {
     const container = document.createElement("div");
     container.className = "attr-list-container";
-    container.id = el.id
+    container.id = el.id;
 
-    const title = document.createElement("span");
-    title.textContent = el.title;
+    const title = document.createElement("input");
+    title.value = el.title;
     title.className = "attr-list-title";
+    title.setAttribute("spellcheck", "false")
 
-    const remove = document.createElement("div")
+    const remove = document.createElement("div");
     remove.className = "btn-attr-delete";
-    remove.id = el.title
+    remove.id = el.title;
 
-    const desc = document.createElement("span");
-    desc.textContent = el.attr;
+    const desc = document.createElement("input");
+    desc.value = el.attr;
     desc.className = "attr-list-desc";
+    desc.setAttribute("spellcheck", "false")
 
-    container.appendChild(remove)
+    container.appendChild(remove);
     container.appendChild(title);
     container.appendChild(desc);
     attrContainer.appendChild(container);
@@ -95,42 +101,32 @@ function deleteAttr(e) {
       if(attrArr[i].title === e.target.id){
         attrArr.splice( i , 1);
     };
-  }
+  };
   removeTarget.remove();
 };
 
 function modifiyAttr(e){
   const eTag = e.target;
   if(eTag.className === "attr-list-title"){
-    let value = e.target.textContent;
-    let titleInput = document.createElement("input");
-    titleInput.className = "input-attr-name";
-    titleInput.value = value;
-    document.getElementById("" + eTag.parentElement.id).insertBefore(titleInput, eTag);
-    eTag.remove();
-  }
+    let value = e.target;
+    value.classList.add("input-attr-name");
+  };
 
   if(eTag.className === "attr-list-desc"){
-    let value = e.target.textContent;
-    let titleInput = document.createElement("input");
-    titleInput.className = "input-attr-user-custom";
-    titleInput.value = value;
-    document.getElementById("" + eTag.parentElement.id).insertBefore(titleInput, eTag);
-    eTag.remove();
-  }
-
+    let value = e.target;
+    value.classList.add("input-attr-user-custom")
+  };
 
   attrArr.forEach((el) => {
     if(el.title.includes(e.target.value)){
       e.target.addEventListener("focusout", () => {
         el.title = e.target.value;
-        e.target.parentElement.remove();
         while(attrContainer.hasChildNodes()){
           attrContainer.removeChild(attrContainer.firstChild);
         };
         attrRender(attrArr);
         attrArr.forEach((el)=> {
-          const btn = document.querySelector('#' + el.title);
+          const btn = document.querySelector("#" + el.title);
           btn.addEventListener("click", deleteAttr);
         });
       });
@@ -139,20 +135,18 @@ function modifiyAttr(e){
     if(el.attr.includes(e.target.value)){
       e.target.addEventListener("focusout", () => {
         el.attr = e.target.value;
-        e.target.parentElement.remove();
         while(attrContainer.hasChildNodes()){
           attrContainer.removeChild(attrContainer.firstChild);
         };
         attrRender(attrArr);
-
         attrArr.forEach((el)=> {
           const btn = document.querySelector("#" + el.title);
           btn.addEventListener("click", deleteAttr);
         });
-      })
-    }
-  })
-}
+      });
+    };
+  });
+};
 
 attrRender(attrArr);
 giveId();
