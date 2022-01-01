@@ -46,6 +46,8 @@ const renderTags = function (arr, cls) {
   return function () {
     wrapTag.innerHTML = "";
     const { redColor, greenColor, blueColor } = theme;
+    const basic = [redColor, greenColor, blueColor];
+    const chosen = [[...basic]];
     const fragment = document.createDocumentFragment();
     arr.forEach((data,index) => {
       const { tagName, keyword } = data;
@@ -54,10 +56,17 @@ const renderTags = function (arr, cls) {
         let text = document.createTextNode(tagName);
         item.appendChild(text);
         if (isFirst) {
-          const rgb = [redColor, greenColor, blueColor]
+          const rgb = [...basic]
             .map(color => {
-              const value = color + Math.floor(Math.random()*80) - 40;
-              return value - value % 10;
+              let offset = 0;
+              let unit = 1;
+              if (color < 30) offset = 30 - color;
+              else if (color > 225) offset = 225 - color;
+              else unit = 10;
+              if (offset > 15) offset = Math.floor(Math.random()*15) + 1;
+              else if (offset < -15) offset = -Math.floor(Math.random()*15) - 1;
+              const value = color + Math.floor(Math.random()*60) - 30 + offset;
+              return value - value % unit;
             });
           arr[index].color = rgb;
           colorMatch[data.tagName] = rgb;
@@ -71,7 +80,7 @@ const renderTags = function (arr, cls) {
     if (isFirst) {
       isFirst = false;
     }
-    colorMatch.body = [redColor, greenColor, blueColor];
+    colorMatch.body = [...basic];
     if (redColor + greenColor + blueColor < 320) {
       board.isWhiteBorder = true;
       wrapTag.classList.add("wrap-tag-white");
