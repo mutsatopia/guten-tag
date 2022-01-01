@@ -45,6 +45,9 @@ const tagClickHandler = (data) => {
 const renderTags = function (arr, cls) {
   return function () {
     wrapTag.innerHTML = "";
+    const { redColor, greenColor, blueColor } = theme;
+    const basic = [redColor, greenColor, blueColor];
+    const chosen = [[...basic]];
     const fragment = document.createDocumentFragment();
     arr.forEach((data,index) => {
       const { tagName, keyword } = data;
@@ -53,49 +56,67 @@ const renderTags = function (arr, cls) {
         let text = document.createTextNode(tagName);
         item.appendChild(text);
         if (isFirst) {
-          let { redColor, greenColor, blueColor } = theme;
-          const rgb = [redColor, greenColor, blueColor]
-            .map(color => color + Math.floor(Math.random()*(70-1+1)) + 1);
+          const rgb = [...basic]
+            .map(color => {
+              let offset = 0;
+              let unit = 1;
+              if (color < 30) offset = 30 - color;
+              else if (color > 225) offset = 225 - color;
+              else unit = 10;
+              if (offset > 15) offset = Math.floor(Math.random()*15) + 1;
+              else if (offset < -15) offset = -Math.floor(Math.random()*15) - 1;
+              const value = color + Math.floor(Math.random()*60) - 30 + offset;
+              return value - value % unit;
+            });
           arr[index].color = rgb;
+          colorMatch[data.tagName] = rgb;
         }
-        item.style.backgroundColor = `rgb(${tagData[index].color.join(',')})`;
+        item.style.backgroundColor = `rgb(${arr[index].color.join(',')})`;
         item.addEventListener("click", tagClickHandler(data))
         fragment.appendChild(item);
       }
     });
     wrapTag.appendChild(fragment);
-    if(isFirst){
-      isFirst=false;
+    if (isFirst) {
+      isFirst = false;
     }
+    colorMatch.body = [...basic];
+    if (redColor + greenColor + blueColor < 320) {
+      board.isWhiteBorder = true;
+      wrapTag.classList.add("wrap-tag-white");
+    } else {
+      board.isWhiteBorder = false;
+      wrapTag.classList.remove("wrap-tag-white");
+    }
+    board.paint();
   };
 };
 
-const changeTheme = function(r,g,b){
-  return function(){
+const changeTheme = function(r, g, b){
+  return function() {
     theme.setColor(r, g, b);
-    isFirst=true;
-    btnFilters.forEach((check)=>{
-      if(check.id!=="btn-all"){
+    isFirst = true;
+    btnFilters.forEach((check) => {
+      if (check.id !== "btn-all") {
         check.classList.remove("selected");
-      }else{
+      } else {
         check.classList.add("selected");
       }
-    })
+    });
     renderTags(tagData)();
   }
-} 
+};
 
 customTheme.addEventListener("input", watchColor, false);
 
-function watchColor(event){
+function watchColor(event) {
   let colorCode = event.target.value;
-  console.log(colorCode);
+  //console.log(colorCode);
   const r = parseInt(colorCode.substr(1,2),16);
   const g = parseInt(colorCode.substr(3,2),16);
   const b = parseInt(colorCode.substr(5,2),16);
   
-  return changeTheme(r,g,b)();
-    
+  return changeTheme(r,g,b)();   
 }
 
 
@@ -105,9 +126,9 @@ btnInline.addEventListener("click", renderTags(tagData, "inline"));
 btnBlock.addEventListener("click", renderTags(tagData, "block"));
 btnSemantic.addEventListener("click", renderTags(tagData, "semantic"));
 
-pinkTheme.addEventListener("click", changeTheme(212,154,219));
-greenTheme.addEventListener("click", changeTheme(163,219,140));
-blueTheme.addEventListener("click", changeTheme(90,219,196));
-yellowTheme.addEventListener("click",changeTheme(218,213,139));
+pinkTheme.addEventListener("click", changeTheme(255, 220, 240));
+greenTheme.addEventListener("click", changeTheme(207, 247, 219));
+blueTheme.addEventListener("click", changeTheme(220, 239, 253));
+yellowTheme.addEventListener("click",changeTheme(255, 248, 214));
 
 renderTags(tagData)();
