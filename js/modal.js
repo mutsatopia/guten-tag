@@ -15,11 +15,10 @@ btnExportModal.addEventListener("click", toggleModalOn);
 dimed.addEventListener("click", toggleModalOn);
 btnClose.addEventListener("click", toggleModalOn);
 
-
-
 const onCopied = () => {
   codePreview.select();
   document.execCommand("copy");
+  codePreview.setSelectionRange(0, 0);
   btnCopy.innerHTML = "<i class='bi bi-check-lg'></i> Copied :)";
 };
 
