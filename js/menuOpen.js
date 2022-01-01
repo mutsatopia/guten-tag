@@ -29,7 +29,9 @@ document.addEventListener("click",(event)=>{
   && event.target.classList.value!=="txt-grid-size"
   && event.target.classList.value!=="inp-grid-size"
   && event.target.classList.value!=="list-theme-container"
-  && event.target.classList.value!=="list-grid-container"){
+  && event.target.classList.value!=="list-grid-container"
+  && event.target.classList.value!=="txt-color"
+  && event.target.classList.value!=="inp-color"){
     gridPlace.classList.remove("open");
     palette.classList.remove("open");
   }

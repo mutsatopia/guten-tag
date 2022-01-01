@@ -100,7 +100,7 @@ body {
     flex-wrap: wrap;
     column-gap: 10px;
     row-gap: 5px;
-    padding: 5px 0;
+    padding: 5px 0 0 0;
     border-bottom: 1px solid #808080;
 }
 
@@ -162,6 +162,27 @@ input[type=number]::-webkit-inner-spin-button {
 input[type="checkbox"]{
     position: absolute;
     margin-top: 8px;
+}
+
+input[type="color"]{
+    width: 23px;
+    height: 25px;
+    border: none;
+    background-color: inherit;
+}
+
+.inp-color::-webkit-color-swatch{
+    border-radius: 25px;
+    box-sizing: content-box;
+}
+
+.txt-color{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin : 3px 0 0 4px;
+    font-size: 15px;
 }
 
 .btn-theme-user-custom{
