@@ -452,6 +452,15 @@ main {
     cursor: pointer;
 }
 
+.btn-checked {
+    background-color: #c4c4c4;
+    color: #fff;
+}
+
+.btn-attribute {
+    display: none;
+}
+
 .bi-search {
     font-size: 15px;
 }

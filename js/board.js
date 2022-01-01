@@ -181,21 +181,28 @@ const board = {
 
   select(event) {
     const nextSelected = this.searchByLocation(event);
+    
     if (nextSelected === this.selected || !nextSelected) {
       this.selected?.setState("located");
-      this.selected?.elem?.classList?.remove('selected-tag');
+      this.selected?.elem?.classList?.remove("selected-tag");
       this.selected = null;
       this.showTagBar();
+
+      attrBtn.style.display = "none";
+      tagBtn.classList.remove('btn-checked')
+
     } else if (this.selected) {
       this.selected.setState("located");
       this.selected.elem.classList.remove('selected-tag');
       this.selected = nextSelected;
       this.selected?.setState("selected");
       this.showAttrBar();
+      changeBtnColor();
     } else {
       this.selected = nextSelected;
       this.selected?.setState("selected");
       this.showAttrBar();
+      changeBtnColor();
     }
   },
 
@@ -442,6 +449,29 @@ const keydownHandler = ({ key }) => {
   }
 };
 
+const changeBtnColor = () => {
+  attrBtn.style.display = "block";
+
+  attrBtn.classList.remove("btn-checked");
+  tagBtn.classList.add("btn-checked");
+};
+
+const tagBtn = document.querySelector(".btn-tag-list");
+const attrBtn = document.querySelector(".btn-attribute");
+
+tagBtn.addEventListener("click", ()=>{
+  if(tagBtn.classList.contains("btn-checked")){
+  attrBtn.classList.add("btn-checked");
+  tagBtn.classList.remove("btn-checked");
+  };
+});
+
+attrBtn.addEventListener("click", ()=> {
+    if(attrBtn.classList.contains("btn-checked")){
+    tagBtn.classList.add("btn-checked");
+    attrBtn.classList.remove("btn-checked");
+  };
+});
 
 
 document.addEventListener("keydown", keydownHandler);
