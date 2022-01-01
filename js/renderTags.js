@@ -15,6 +15,7 @@ const btnFilters = document.querySelectorAll(".btn-filter-tag");
 //버튼 터치 시 볼드
 btnFilters.forEach((targetBtn)=>{
   targetBtn.addEventListener("click",()=>{
+    board.clearReady();
     targetBtn.classList.add("selected");
 
     btnFilters.forEach((btn)=>{
@@ -103,6 +104,7 @@ const changeTheme = function(r, g, b){
         check.classList.add("selected");
       }
     });
+    
     renderTags(tagData)();
   }
 };
@@ -111,7 +113,6 @@ customTheme.addEventListener("input", watchColor, false);
 
 function watchColor(event) {
   let colorCode = event.target.value;
-  //console.log(colorCode);
   const r = parseInt(colorCode.substr(1,2),16);
   const g = parseInt(colorCode.substr(3,2),16);
   const b = parseInt(colorCode.substr(5,2),16);
