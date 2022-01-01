@@ -178,4 +178,11 @@ class Tag {
     this.children.splice(this.children.indexOf(tag), 1);
     this.setFontSize();
   }
+
+  rearrangeChildren() {
+    this.children.sort((a, b) => {
+      if (a.y === b.y) return a.x - b.x;
+      return a.y - b.y;
+    });
+  }
 }

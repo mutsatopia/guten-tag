@@ -174,6 +174,7 @@ const board = {
     this.forEach(tag => {
       if (tag.state === "modified") {
         tag.setState("located");
+        tag.rearrangeChildren();
       }
     });
   },
@@ -231,11 +232,13 @@ const board = {
             tag.setState("located");
             tag.restoreSize();
             tag.restorePos();
+            tag.rearrangeChildren();
           } else {
             const tagArr = this.searchAllTagsByLocation(event);
             if (tagArr) {
               if (!tagArr.includes(tag)) {
                 tag.restoreSize();
+                tag.rearrangeChildren();
               }
             }
           }
@@ -247,6 +250,7 @@ const board = {
           tag.setState("located");
           tag.restoreSize();
           tag.restorePos();
+          tag.rearrangeChildren();
         }
       });
     }
