@@ -4,6 +4,7 @@ const board = {
   ready: null, // 태그 선택 창에서 선택한 요소
   selected: null,
   prevInfo: new Map(),
+  isWhiteBorder: false,
 
   // board 초기화
   // 1. body 생성 및 초기화

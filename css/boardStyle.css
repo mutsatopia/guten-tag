@@ -524,6 +524,11 @@ main {
     transition: all .1s;
 }
 
+.tag-white-border {
+    border: solid white;
+    color: white;
+}
+
 .board-grid {
     position: absolute;
     z-index: 9;
@@ -606,6 +611,10 @@ main {
 
 .wrap-attr-menu.on {
     display: flex;
+}
+
+.wrap-tag-white {
+    color: white;
 }
 
 .wrap-tag-name {

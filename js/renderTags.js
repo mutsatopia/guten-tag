@@ -68,10 +68,17 @@ const renderTags = function (arr, cls) {
       }
     });
     wrapTag.appendChild(fragment);
-    if(isFirst){
-      isFirst=false;
+    if (isFirst) {
+      isFirst = false;
     }
     colorMatch.body = [redColor, greenColor, blueColor];
+    if (redColor + greenColor + blueColor < 320) {
+      board.isWhiteBorder = true;
+      wrapTag.classList.add("wrap-tag-white");
+    } else {
+      board.isWhiteBorder = false;
+      wrapTag.classList.remove("wrap-tag-white");
+    }
     board.paint();
   };
 };
@@ -89,19 +96,18 @@ const changeTheme = function(r, g, b){
     });
     renderTags(tagData)();
   }
-} 
+};
 
 customTheme.addEventListener("input", watchColor, false);
 
-function watchColor(event){
+function watchColor(event) {
   let colorCode = event.target.value;
   //console.log(colorCode);
   const r = parseInt(colorCode.substr(1,2),16);
   const g = parseInt(colorCode.substr(3,2),16);
   const b = parseInt(colorCode.substr(5,2),16);
   
-  return changeTheme(r,g,b)();
-    
+  return changeTheme(r,g,b)();   
 }
 
 
