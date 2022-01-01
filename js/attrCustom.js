@@ -6,57 +6,49 @@ const sectionAdd = document.querySelector(".sect-attr-add");
 
 attrInput.addEventListener("focusout", addAttr);
 
-const attrArr = [
-  {
-    id:1,
-    title:"href",
-    attr:"www.hihi.com"
-  },
-  {
-    id:2,
-    title:"type",
-    attr:"button"
-  }
-];
-
 function addAttr() {
-  const elName = document.querySelector(".input-attr-name");
-  const attr = document.querySelector(".input-attr-user-custom");
+  const attrName = document.querySelector(".input-attr-name");
+  const attrValue = document.querySelector(".input-attr-user-custom");
+  const { attr } = board.selected;
 
-  if(elName.value.length > 0 & attr.value.length > 0) {
-    if(attrArr.length === 0){
-      attrArr.push({
+  if (attrName.value.length > 0 & attrValue.value.length > 0) {
+    if (attr.length === 0) {
+      attr.push({
         id: 1,
-        title: elName.value,
-        attr: attr.value
+        title: attrName.value,
+        attr: attrValue.value
       });  
     } else {
-      attrArr.push({
-        id: attrArr[attrArr.length-1].id + 1,
-        title: elName.value,
-        attr: attr.value
+      attr.push({
+        id: attr[attr.length-1].id + 1,
+        title: attrName.value,
+        attr: attrValue.value
       });
     };
   };
 
-  while(attrContainer.hasChildNodes()){
+  while (attrContainer.hasChildNodes()) {
     attrContainer.removeChild(attrContainer.firstChild);
   };
 
-  attrRender(attrArr);
+  attrRender(attr);
 
-  attrArr.forEach((el)=> {
+  attr.forEach((el)=> {
     const btn = document.querySelector("#" + el.title);
     btn.addEventListener("click", deleteAttr);
   });
 
-  elName.value = null;
-  attr.value = null;
+  attrName.value = "";
+  attrValue.value = "";
   sectionAdd.classList.remove("on");
   show.classList.remove("on");
 };
 
 function attrRender(arr) {
+  while (attrContainer.hasChildNodes()) {
+    attrContainer.removeChild(attrContainer.firstChild);
+  };
+
   arr.forEach((el) => {
     const container = document.createElement("div");
     container.className = "attr-list-container";
@@ -80,6 +72,9 @@ function attrRender(arr) {
     container.appendChild(title);
     container.appendChild(desc);
     attrContainer.appendChild(container);
+
+    const btn = document.querySelector("#" + el.title);
+    btn.addEventListener("click", deleteAttr);
   });
   const attrItem = document.querySelectorAll(".attr-list-container");
   attrItem.forEach((el)=> {
@@ -87,59 +82,53 @@ function attrRender(arr) {
   });
 };
 
-
-function giveId(){
-  attrArr.forEach((el)=> {
-    const btn = document.querySelector("#" + el.title);
-    btn.addEventListener("click", deleteAttr);
-  });
-};
-
 function deleteAttr(e) {
+  const { attr } = board.selected;
   const removeTarget = e.target.parentElement;
-  for(let i = attrArr.length-1; i >= 0; i--){
-      if(attrArr[i].title === e.target.id){
-        attrArr.splice( i , 1);
+  for (let i = attr.length-1; i >= 0; i--) {
+    if (attr[i].title === e.target.id) {
+      attr.splice(i, 1);
     };
   };
   removeTarget.remove();
 };
 
-function modifiyAttr(e){
+function modifiyAttr(e) {
+  const { attr } = board.selected;
   const eTag = e.target;
-  if(eTag.className === "attr-list-title"){
+  if (eTag.className === "attr-list-title") {
     let value = e.target;
     value.classList.add("input-attr-name");
   };
 
-  if(eTag.className === "attr-list-desc"){
+  if (eTag.className === "attr-list-desc") {
     let value = e.target;
-    value.classList.add("input-attr-user-custom")
+    value.classList.add("input-attr-user-custom");
   };
 
-  attrArr.forEach((el) => {
-    if(el.title.includes(e.target.value)){
+  attr.forEach((el) => {
+    if (el.title.includes(e.target.value)) {
       e.target.addEventListener("focusout", () => {
         el.title = e.target.value;
-        while(attrContainer.hasChildNodes()){
+        while (attrContainer.hasChildNodes()) {
           attrContainer.removeChild(attrContainer.firstChild);
         };
-        attrRender(attrArr);
-        attrArr.forEach((el)=> {
+        attrRender(attr);
+        attr.forEach((el) => {
           const btn = document.querySelector("#" + el.title);
           btn.addEventListener("click", deleteAttr);
         });
       });
     };
 
-    if(el.attr.includes(e.target.value)){
+    if (el.attr.includes(e.target.value)) {
       e.target.addEventListener("focusout", () => {
         el.attr = e.target.value;
-        while(attrContainer.hasChildNodes()){
+        while (attrContainer.hasChildNodes()) {
           attrContainer.removeChild(attrContainer.firstChild);
         };
-        attrRender(attrArr);
-        attrArr.forEach((el)=> {
+        attrRender(attr);
+        attr.forEach((el) => {
           const btn = document.querySelector("#" + el.title);
           btn.addEventListener("click", deleteAttr);
         });
@@ -147,11 +136,3 @@ function modifiyAttr(e){
     };
   });
 };
-
-attrRender(attrArr);
-giveId();
-
-
-
-
-
