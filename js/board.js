@@ -1,4 +1,5 @@
 const board = {
+  border: 3,
   elem: document.querySelector(".board"),
   body: new Tag({ tagName: "body", keyword: [], attr: [] }, { state: "located" }),
   ready: null, // 태그 선택 창에서 선택한 요소
@@ -126,6 +127,38 @@ const board = {
       [tag1.x + tag1.width, tag1.y + tag1.height]
     ].some(([x, y]) => (tag2.x <= x && x <= tag2.x + tag2.width)
       && (tag2.y <= y && y <= tag2.y + tag2.height));
+  },
+
+  isBorderTop(event) {
+    const [ cx, cy ] = this.getOffset(event);
+    const { x, y, width } = this.selected;
+    const border = this.border * 1.5;
+    return x + border <= cx && cx < x + width - border
+        && y - border <= cy && cy <= y + border;
+  },
+
+  isBorderBottom(event) {
+    const [ cx, cy ] = this.getOffset(event);
+    const { x, y, width, height } = this.selected;
+    const border = this.border * 1.5;
+    return x + border <= cx && cx < x + width - border
+        && y + height - border <= cy && cy < y + height + border;
+  },
+
+  isBorderLeft(event) {
+    const [ cx, cy ] = this.getOffset(event);
+    const { x, y, height } = this.selected;
+    const border = this.border * 1.5;
+    return x - border <= cx && cx < x + border
+        && y + border <= cy && cy < y + height - border;
+  },
+
+  isBorderRight(event) {
+    const [ cx, cy ] = this.getOffset(event);
+    const { x, y, width, height } = this.selected;
+    const border = this.border * 1.5;
+    return x + width - border <= cx && cx < x + width + border
+        && y + border <= cy && cy < y + height - border;
   },
 
   // tagData의 태그 data를 인자로 받아서 Tag 객체를 생성하고,
@@ -386,6 +419,47 @@ const board = {
     this.forEach((tag) => {
       tag.paint();
     });
+  },
+
+  scaleStart(direction) {
+    this.direction = direction;
+    this.selected.setState("draggable");
+  },
+
+  scale(event) {
+    const [ cx, cy ] = this.getOffset(event);
+    const { x, y, width, height, parent } = this.selected;
+    const { size } = grid;
+    switch (this.direction) {
+      case "top":
+        if (trim(y - cy, size) === 0) return;
+        this.selected.setSize(null, height + trim(y - cy, size));
+        this.selected.setPos(null, cy);
+        break;
+      case "bottom":
+        if (trim(cy - y - height, size) === 0) return;
+        this.selected.setSize(null, height + trim(cy - y - height, size));
+        break;
+      case "left":
+        if (trim(x - cx, size) === 0) return;
+        this.selected.setSize(width + trim(x - cx, size));
+        this.selected.setPos(cx);
+        break;
+      case "right":
+        if (trim(cx - y, size) === 0) return;
+        this.selected.setSize(width + trim(cx - x - width, size));
+    }
+    if (parent) {
+      this.selected.modifyParentSize(parent);
+      this.selected.modifyChildrenPos(parent);
+    }
+    this.restore(event, "selected");
+  },
+
+  scaleEnd() {
+    this.direction = null;
+    this.forEach((tag) => tag.setState("located"));
+    this.selected.setState("selected");
   }
 };
 
@@ -415,14 +489,18 @@ const mouseoverHandler = (event) => {
 // 마우스가 보드 안에서 움직일 때 이벤트 핸들러
 const mousemoveHandler = (event) => {
   cursor.setPos(event);
-  const { ready, selected, isMouseDown } = board;
+  const { ready, selected, isMouseDown, direction } = board;
   const parent = board.searchByLocation(event);
   const [ x, y ] = board.getOffset(event);
   if (ready) {
     ready.setReadyStyle(parent, x, y);
     board.restore(event);
-  } else if (selected && isMouseDown) {
-    board.drag(event);
+  } else if (selected) {
+    if (isMouseDown) {
+      board.drag(event);
+    } else if (direction) {
+      board.scale(event);
+    }
   }
 };
 
@@ -450,15 +528,28 @@ const mousedownHandler = (event) => {
     }
   } else {
     if (selected) {
-      board.dragStart(event);
+      if (board.isBorderTop(event)) {
+        board.scaleStart("top");
+      } else if (board.isBorderBottom(event)) {
+        board.scaleStart("bottom");
+      } else if (board.isBorderLeft(event)) {
+        board.scaleStart("left");
+      } else if (board.isBorderRight(event)) {
+        board.scaleStart("right");
+      } else {
+        board.dragStart(event);
+      }
     }
   }
 };
 
 const mouseupHandler = (event) => {
-  const { selected, isMouseDown } = board; 
-  if (selected && isMouseDown) {
+  const { selected, isMouseDown, direction } = board;
+  if (!selected) return;
+  if (isMouseDown) {
     board.dragEnd(event);
+  } else if (direction) {
+    board.scaleEnd(event);
   }
 };
 
