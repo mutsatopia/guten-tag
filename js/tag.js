@@ -28,8 +28,8 @@ class Tag {
       this.elem.style.fontSize = `${size * 0.7}px`;
     } else {
       this.elem.classList.remove("tag-text-loc");
-      const fontSize = (this.height ?? 100) / 4;
-      this.elem.style.fontSize = `${fontSize > 40 ? 40 : fontSize}px`;
+      const fontSize = (this.height ?? 100) / 3;
+      this.elem.style.fontSize = `${fontSize > 60 ? 60 : fontSize < 16 ? 16 : fontSize}px`;
     }
   }
 
@@ -135,11 +135,12 @@ class Tag {
 
   setReadyStyle(parent, x, y) {
     const { size } = grid;
+    const { gridX, gridY } = gridMatch[this.tagName];
     if (parent && this.keyword.includes("block")) {
-      this.setSize(trim(parent.width, size) - size * 2 + 1, size * 3 + 1);
+      this.setSize(trim(parent.width, size) - size * 2 + 1, size * gridY + 1);
       this.setPos(parent.x + size, y);
     } else {
-      this.setSize(size * 7 + 1, size * 3 + 1);
+      this.setSize(size * gridX + 1, size * gridY + 1);
       this.setPos(x, y);
     }
     if (parent) {
