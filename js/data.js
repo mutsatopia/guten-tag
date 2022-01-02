@@ -24,6 +24,7 @@ const tagData = [
   {
     tagName: "span",
     keyword: ["inline"],
+    gridY: 1,
   },
   {
     tagName: "a",
@@ -44,6 +45,7 @@ const tagData = [
   {
     tagName: "li",
     keyword: ["block"],
+    gridY: 2,
   },
   {
     tagName: "header",
@@ -56,6 +58,7 @@ const tagData = [
   {
     tagName: "main",
     keyword: ["block", "semantic"],
+    gridY: 5,
   },
   {
     tagName: "aside",
@@ -74,48 +77,58 @@ const tagData = [
     keyword: ["block", "semantic"],
   },
   {
-    tagName: "summary",
-    keyword: ["block", "semantic"],
-  },
-  {
     tagName: "details",
     keyword: ["block", "semantic"],
   },
   {
+    tagName: "summary",
+    keyword: ["block", "semantic"],
+    gridY: 2,
+  },
+  {
     tagName: "figure",
     keyword: ["block", "semantic"],
+    gridY: 5,
   },
   {
     tagName: "figcaption",
     keyword: ["block", "semantic"],
+    gridY: 1,
   },
   {
     tagName: "mark",
     keyword: ["inline", "semantic"],
+    gridY: 2,
   },
   {
     tagName: "h1",
     keyword: ["block"],
+    gridY: 2,
   },
   {
     tagName: "h2",
     keyword: ["block"],
+    gridY: 2,
   },
   {
     tagName: "h3",
     keyword: ["block"],
+    gridY: 2,
   },
   {
     tagName: "h4",
     keyword: ["block"],
+    gridY: 2,
   },
   {
     tagName: "h5",
     keyword: ["block"],
+    gridY: 2,
   },
   {
     tagName: "h6",
     keyword: ["block"],
+    gridY: 2,
   },
   {
     tagName: "hgroup",
@@ -124,14 +137,24 @@ const tagData = [
   {
     tagName: "strong",
     keyword: ["inline"],
+    gridX: 15,
+    gridY: 1,
   },
   {
     tagName: "em",
     keyword: ["inline"],
+    gridX: 15,
+    gridY: 1,
   },
   {
     tagName: "fieldset",
     keyword: ["block"],
+    gridY: 5,
+  },
+  {
+    tagName: "legend",
+    keyword: ["block"],
+    gridY: 1,
   },
   {
     tagName: "form",
@@ -140,14 +163,17 @@ const tagData = [
   {
     tagName: "label",
     keyword: ["inline"],
+    gridY: 2,
   },
   {
     tagName: "input",
     keyword: ["inline"],
+    gridY: 2,
   },
   {
     tagName: "button",
     keyword: ["inline"],
+    gridY: 2,
   },
   {
     tagName: "select",
@@ -160,6 +186,8 @@ const tagData = [
   {
     tagName: "q",
     keyword: ["inline"],
+    gridX: 15,
+    gridY: 1,
   },
   {
     tagName: "blockquote",
@@ -168,10 +196,12 @@ const tagData = [
   {
     tagName: "cite",
     keyword: ["inline"],
+    gridY: 1,
   },
   {
     tagName: "hr",
     keyword: ["block"],
+    gridY: 1,
   },
   {
     tagName: "address",
@@ -180,6 +210,7 @@ const tagData = [
   {
     tagName: "small",
     keyword: ["inline"],
+    gridY: 1,
   },
   {
     tagName: "dl",
@@ -188,22 +219,28 @@ const tagData = [
   {
     tagName: "dt",
     keyword: ["block"],
+    gridY: 1,
   },
   {
     tagName: "dd",
     keyword: ["block"],
+    gridY: 1,
   },
   {
     tagName: "video",
     keyword: ["inline"],
+    gridX: 9,
+    gridY: 4,
   },
   {
     tagName: "audio",
     keyword: ["inline"],
+    gridY: 2,
   },
   {
     tagName: "iframe",
     keyword: ["inline"],
+    gridX: 11,
   },
   {
     tagName: "table",
@@ -212,6 +249,7 @@ const tagData = [
   {
     tagName: "caption",
     keyword: ["block"],
+    gridY: 1,
   },
   {
     tagName: "colgroup",
@@ -244,26 +282,37 @@ const tagData = [
   {
     tagName: "td",
     keyword: ["block"],
+    gridY: 1,
   },
   {
     tagName: "b",
     keyword: ["inline"],
+    gridY: 1,
   },
   {
     tagName: "i",
     keyword: ["inline"],
+    gridY: 1,
   },
   {
     tagName: "u",
     keyword: ["inline"],
+    gridY: 1,
+  },
+  {
+    tagName: "var",
+    keyword: ["inline"],
+    gridY: 2,
   },
   {
     tagName: "sup",
     keyword: ["inline"],
+    gridY: 1,
   },
   {
     tagName: "abbr",
     keyword: ["inline"],
+    gridY: 1,
   },
   {
     tagName: "pre",
@@ -272,5 +321,6 @@ const tagData = [
   {
     tagName: "code",
     keyword: ["inline"],
+    gridY: 1,
   },
 ];

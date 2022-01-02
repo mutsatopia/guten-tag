@@ -134,7 +134,7 @@ class Tag {
       this.setSize(trim(parent.width, size) - size * 2 + 1, size * 3 + 1);
       this.setPos(parent.x + size, y);
     } else {
-      this.setSize(size * 6 + 1, size * 3 + 1);
+      this.setSize(size * 7 + 1, size * 3 + 1);
       this.setPos(x, y);
     }
     if (parent) {
