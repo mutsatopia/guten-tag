@@ -28,8 +28,8 @@ class Tag {
       this.elem.style.fontSize = `${size * 0.7}px`;
     } else {
       this.elem.classList.remove("tag-text-loc");
-      const fontSize = (this.height ?? 100) / 4;
-      this.elem.style.fontSize = `${fontSize > 40 ? 40 : fontSize}px`;
+      const fontSize = (this.height ?? 100) / 3;
+      this.elem.style.fontSize = `${fontSize > 60 ? 60 : fontSize < 16 ? 16 : fontSize}px`;
     }
   }
 
