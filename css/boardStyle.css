@@ -578,8 +578,13 @@ main {
 }
 
 .selected-tag {
+    border-color: #409cdf;
+}
+
+.selected-tag-bright {
     border-color: #ff5101;
 }
+
 @keyframes outlineColor {
     0%{
         outline-color: #FAB6B1;

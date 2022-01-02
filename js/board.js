@@ -225,6 +225,7 @@ const board = {
   clearSelected() {
     this.selected?.setState("located");
     this.selected?.elem?.classList?.remove('selected-tag');
+    this.selected?.elem?.classList?.remove('selected-tag-bright');
     this.selected = null;
   },
 
@@ -241,6 +242,7 @@ const board = {
     } else if (this.selected) {
       this.selected.setState("located");
       this.selected.elem.classList.remove('selected-tag');
+      this.selected.elem.classList.remove('selected-tag-bright');
       this.selected = nextSelected;
       this.selected?.setState("selected");
       this.showAttrBar();

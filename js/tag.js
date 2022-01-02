@@ -99,7 +99,12 @@ class Tag {
         break;
       case "selected":
         this.elem.style.opacity = 1;
-        this.elem.classList.add('selected-tag');
+        const [ r, g, b ] = colorMatch.body;
+        if (b > 127 && r + g < 128) {
+          this.elem.classList.add('selected-tag-bright');
+        } else {
+          this.elem.classList.add('selected-tag');
+        }
     }
   }
 
