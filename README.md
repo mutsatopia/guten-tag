@@ -1,5 +1,7 @@
 # 구텐Tag - HTML Markup Generator
 - 구텐Tag은 HTML 구조를 보드에 그려나가는 방식의 마크업 작성 서비스입니다.
+- 활용 예시
+<img src="resource/example_structure.png"/><br>
 
 ## 1. 목표와 기능
 ### 1.1 목표
@@ -75,7 +77,10 @@
 ### 5.2 UI
 - 초기 기획안<br>
 <img src="resource/planning1.png"/><br>
-- UI<br><img src="resource/planning2.png" width="70%"/>
+- UI<br><img src="resource/planning2.png"/><br>
+- 구텐Tag으로 만든 사이트 구조<br>
+<img src="resource/gutentag_structure.png"/><br>
+
 
 ## 6. 메인 기능
 ## 7. 개발하며 느낀 점
