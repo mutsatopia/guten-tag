@@ -1,75 +1,169 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/font.css" />
     <link rel="stylesheet" href="./css/boardStyle.css" />
-  </head>
-  <body>
+</head>
+
+<body>
     <header class="header-menu-bar">
-      <h1 class="sr-only">메인 보드 페이지입니다.</h1>
-      <a href="javascript:void(0);">
-        <img
-          src="./resource/logoblack_mini.png"
-          alt="구텐탁 로고이미지"
-          class="link-logo"
-        />
-      </a>
+        <h1 class="sr-only">메인 보드 페이지입니다.</h1>
+        <a href="index.html">
+            <img src="./resource/logoblack_mini.png" alt="구텐탁 로고이미지" class="link-logo" />
+        </a>
 
-      <input type="text" id="title" value="Document" class="input-title" />
+        <input type="text" id="title" placeholder="✎ 문서 제목을 입력하세요" class="input-title" />
 
-      <div class="warp-btn-menu">
-        <button type="button" class="btn-headmenu palette">
-          <i class="bi bi-palette-fill"></i> 테마
-        </button>
-        <button type="button" class="btn-headmenu grid">
-          <i class="bi bi-grid-3x3"></i> 격자
-        </button>
-        <button type="button" class="btn-headmenu file">
-          <i class="bi bi-file-earmark-text-fill"></i> 추출
-        </button>
-      </div>
+        <section class="modal">
+            <article class="modal-export">
+                <div class="wrap-cont-modal">
+                    <small>구텐Tag</small>
+                    <strong>코드 추출하기</strong>
+                    <div class="wrap-preview">
+                        <i class="bi bi-record-circle-fill"></i><em>미리보기</em>
+                        <div class="input-indent">
+                            <em><i class="bi bi-text-indent-left"></i>들여쓰기</em>
+                            <input type="radio" id="indent-two" name="indent" value="2칸" checked>
+                            <label for="indent-two">2칸</label>
+                            <input type="radio" id="indent-four" name="indent" value="4칸">
+                            <label for="indent-four">4칸</label>
+                        </div>
+                    </div>
+                    <textarea spellcheck="false" class="preview-code"></textarea>
+                    <button type="button" class="btn-copy">클립보드에 복사</button>
+                    <button type="button" class="btn-close">
+                        <img src="resource/x-lg.svg" alt="코드 추출창 닫기">
+                    </button>
+                </div>
+            </article>
+            <div class="modal-dimed"></div>
+        </section>
+
+        <ul class="wrap-btn-menu">
+            <li id="btn-palette" class="btn-headmenu">
+                <i class="bi bi-palette-fill"></i> 테마
+                <button type="button" id="btn-open-theme" class="btn-menu-open"></button>
+                <ul class="list-theme-container palette-menu">
+                    <li><button type="button" class="btn-theme theme-one"></button></li>
+                    <li><button type="button" class="btn-theme theme-two"></button></li>
+                    <li><button type="button" class="btn-theme theme-three"></button></li>
+                    <li><button type="button" class="btn-theme theme-four"></button></li>
+                </ul>
+                <label for="color-tag" class="txt-color palette-menu">색상 선택<input type="color" value="#A3EEFF" id="color-tag"
+                        class="inp-color"></label>
+            </li>
+            <li id="btn-grid" class="btn-headmenu gird-menu">
+                <i class="bi bi-grid-3x3"></i> 격자
+                <button type="button" class="btn-menu-open"></button>
+                <ul class="list-grid-container">
+                    <li>
+                        <label for="grid-check" class="txt-grid-Whether">
+                            격자 표시<input type="checkbox" checked id="grid-check" class="inp-grid-check">
+                        </label>
+                    </li>
+                    <li>
+                        <label for="grid-size" class="txt-grid-size">
+                            크기: <input type="number" id="grid-size" class="inp-grid-size">px
+                        </label>
+                    </li>
+                </ul>
+            </li>
+            <li class="btn-headmenu file">
+                <i class="bi bi-file-earmark-text-fill"></i> 추출
+            </li>
+        </ul>
     </header>
-    <main>
-      <div class="warp-side">
-        <aside class="side-btn-list">
-          <button type="button" class="btn-tag-list">
-            <i class="bi bi-code"></i>
-          </button>
-          <button type="button" class="btn-attribute">
-            <i class="bi bi-three-dots"></i>
-          </button>
+
+    <main class="cont-board">
+        <aside class="wrap-side">
+            <section class="side-btn-list">
+                <button type="button" class="btn-tag-list">
+                    <i class="bi bi-code"></i>
+                </button>
+                <button type="button" class="btn-attribute">
+                    <i class="bi bi-three-dots"></i>
+                </button>
+            </section>
+
+            <section class="side-tag-list side-list-on">
+                <div class="wrap-search">
+                    <label for="search-tag" class="sr-only">태그 검색바</label>
+                    <input type="text" id="search-tag" placeholder="태그를 검색해보세요 👀" class="input-tag-search" />
+                    <button type="button" class="btn-search">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+
+                <div class="wrap-filter">
+                    <button type="button" id="btn-all" class="btn-filter-tag selected">
+                        전체
+                    </button>
+                    <button type="button" id="btn-semantic" class="btn-filter-tag">
+                        시멘틱
+                    </button>
+                    <button type="button" id="btn-inline" class="btn-filter-tag">
+                        인라인
+                    </button>
+                    <button type="button" id="btn-block" class="btn-filter-tag">
+                        블록
+                    </button>
+                </div>
+
+                <ul class="wrap-tag"></ul>
+            </section>
+
+            <section class="side-attr-list">
+                <div class="wrap-tag-name">
+                    <em class="text-select-tag-name">div</em>
+                    <div class="wrap-select-tag-btn">
+                        <button type="button" class="btn-trash"><i class="bi bi-trash"></i></button>
+                    </div>
+                </div>
+
+                <div class="wrap-attr-list">
+                    <div class="sect-attr-add">
+                        <button type="button" class="btn-attr-add"></button>
+                        <p class="txt-attr-add">새 어트리뷰트 추가...</p>
+                    </div>
+                    <div class="wrap-attr-menu">
+                        <label for="attr-name" class="sr-only">속성 입력창</label>
+                        <input type="text" id="attr-name" placeholder="attribute" class="input-attr-name">
+                        <label for="attr-user-custom" class="sr-only">사용자지정 속성의 이름 입력창</label>
+                        <input type="text" id="attr-user-custom" placeholder="value" class="input-attr-user-custom">
+                        <button type="button" class="btn-attr-delete input-delete"></button>
+                    </div>
+                    <div class="attr-item-containers"></div>
+                </div>
+            </section>
         </aside>
 
-        <aside class="side-tag-list">
-          <div class="warp-search">
-            <label for="search-tag" class="sr-only">태그 검색바</label>
-            <input type="text" id="search-tag" class="input-tag-search" />
-            <button type="button" class="btn-search">
-              <i class="bi bi-search"></i>
-            </button>
-          </div>
 
-          <div class="wrap-filter">
-            <button type="button" class="btn-filter-tag">전체</button>
-            <button type="button" class="btn-filter-tag">시멘틱</button>
-            <button type="button" class="btn-filter-tag">인라인</button>
-            <button type="button" class="btn-filter-tag">블록</button>
-          </div>
-
-          <ul class="warp-tag">
-            <!-- <button type="button" class="btn-tag-item">div</button> -->
-          </ul>
-        </aside>
-      </div>
+        <section class="board"></section>
     </main>
-  </body>
+
+    <script src="js/data.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/tag.js"></script>
+    <script src="js/grid.js"></script>
+    <script src="js/cursor.js"></script>
+    <script src="js/board.js"></script>
+    <script src="js/renderTags.js"></script>
+    <script src="js/searchFilter.js"></script>
+    <script src="js/aside.js"></script>
+    <script src="js/attrCustom.js"></script>
+    <script src="js/menuOpen.js"></script>
+    <script src="js/attrBtn.js"></script>
+    <script src="js/modal.js"></script>
+</body>
+
 </html>
