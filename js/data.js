@@ -324,3 +324,11 @@ const tagData = [
     gridY: 1,
   },
 ];
+
+const gridMatch = {};
+tagData.forEach(({ tagName, gridX, gridY }) => {
+  gridMatch[tagName] = {
+    gridX: gridX ?? 7,
+    gridY: gridY ?? 3
+  };
+});
