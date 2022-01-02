@@ -538,6 +538,18 @@ main {
     background: url("../resource/cursor.svg") no-repeat;
 }
 
+.cursor-arrow-lr {
+    width: 15px;
+    height: 15px;
+    background: url("../resource/arrow.svg") no-repeat;
+}
+
+.cursor-arrow-tb {
+    width: 15px;
+    height: 15px;
+    background: url("../resource/arrow.svg") no-repeat;
+}
+
 .tag {
     display: flex;
     justify-content: center;

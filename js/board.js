@@ -462,6 +462,7 @@ const board = {
     this.direction = null;
     this.forEach((tag) => tag.setState("located"));
     this.selected.setState("selected");
+    cursor.showBasic();
   }
 };
 
@@ -502,6 +503,14 @@ const mousemoveHandler = (event) => {
       board.drag(event);
     } else if (direction) {
       board.scale(event);
+    } else {
+      if (board.isBorderTop(event) || board.isBorderBottom(event)) {
+        cursor.showArrow(false);
+      } else if (board.isBorderLeft(event) || board.isBorderRight(event)) {
+        cursor.showArrow();
+      } else {
+        cursor.showBasic();
+      }
     }
   }
 };

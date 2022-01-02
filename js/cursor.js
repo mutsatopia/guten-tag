@@ -24,10 +24,29 @@ const cursor = {
     const { width, height } = this.board;
     if (x + this.size >= width) x = width - this.size;
     if (y + this.size >= height) y = height - this.size;
-    this.elem.style.transform = `translate(${x}px, ${y}px) rotate(-90deg)`;
+    if (this.elem.classList.contains("cursor-arrow-tb")) {
+      this.elem.style.transform = `translate(${x}px, ${y}px)`;
+    } else {
+      this.elem.style.transform = `translate(${x}px, ${y}px) rotate(-90deg)`;
+    }
   },
 
   hide() {
     this.elem.style.display = "none";
+  },
+
+  showBasic() {
+    this.elem.classList.remove("cursor-arrow-lr");
+    this.elem.classList.remove("cursor-arrow-tb");
+  },
+
+  showArrow(isLeftRight = true) {
+    if (isLeftRight) {
+      this.elem.classList.add("cursor-arrow-lr");
+      this.elem.classList.remove("cursor-arrow-tb");
+    } else {
+      this.elem.classList.remove("cursor-arrow-lr");
+      this.elem.classList.add("cursor-arrow-tb");
+    }
   }
 };
