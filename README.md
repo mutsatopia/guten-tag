@@ -19,7 +19,7 @@
 ### 2.1 배포 일정
 - 2022년 1월 13일
 ### 2.2 배포 URL
-- https://d2rzxyya4p6mzb.cloudfront.net/
+- https://gutentag.netlify.app/
 
 ## 3. 팀 소개 및 역할 분담
 ### 3.1 팀 소개
